@@ -19,6 +19,10 @@ public class SignupController {
 	@FXML
 	private TextField password;
 	@FXML
+	private TextField firstname;
+	@FXML
+	private TextField lastname;
+	@FXML
 	private Button createUser;
 	@FXML
 	private Button close;
@@ -38,10 +42,10 @@ public class SignupController {
 	@FXML
 	public void initialize() {
 		createUser.setOnAction(event -> {
-			if (!username.getText().isEmpty() && !password.getText().isEmpty()) {
+			if (!username.getText().isEmpty() && !password.getText().isEmpty() && !firstname.getText().isEmpty() && !lastname.getText().isEmpty()) {
 				User user;
 				try {
-					user = model.getUserDao().createUser(username.getText(), password.getText());
+					user = model.getUserDao().createUser(username.getText(), password.getText(),firstname.getText(),lastname.getText());
 					if (user != null) {
 						status.setText("Created " + user.getUsername());
 						status.setTextFill(Color.GREEN);
@@ -67,7 +71,7 @@ public class SignupController {
 	}
 	
 	public void showStage(Pane root) {
-		Scene scene = new Scene(root, 500, 300);
+		Scene scene = new Scene(root, 600, 400);
 		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.setTitle("Sign up");

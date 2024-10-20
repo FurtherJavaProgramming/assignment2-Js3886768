@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="397.0" prefWidth="490.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label prefHeight="17.0" prefWidth="250.0" text="Username" />
       <TextField fx:id="username" maxWidth="250.0">
@@ -21,12 +21,16 @@
             <Insets bottom="10.0" />
          </VBox.margin>
       </PasswordField>
+      <Label layoutX="130.0" layoutY="154.0" prefWidth="250.0" text="First Name" />
+      <TextField fx:id="firstname" layoutX="130.0" layoutY="103.0" maxWidth="250.0" />
+      <Label layoutX="130.0" layoutY="214.0" prefWidth="250.0" text="Last Name" />
+      <TextField fx:id="lastname" layoutX="130.0" layoutY="85.0" maxWidth="250.0" />
+      <Label fx:id="status" />
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="20.0">
          <children>
-            <Button fx:id="createUser" mnemonicParsing="false" text="Create user" />
+            <Button fx:id="createUser" mnemonicParsing="false" prefWidth="76.0" text="Create user" />
             <Button fx:id="close" mnemonicParsing="false" text="Close" />
          </children>
       </HBox>
-      <Label fx:id="status" />
    </children>
 </VBox>
