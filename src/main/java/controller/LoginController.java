@@ -46,20 +46,39 @@ public class LoginController {
 				User user;
 				try {
 					user = model.getUserDao().getUser(name.getText(), password.getText());
+					
 					if (user != null) {
 						model.setCurrentUser(user);
-						try {
-							FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomeView.fxml"));
-							HomeController homeController = new HomeController(stage, model);
+						
+						if ((user.getUsername()).equals("admin")) {
+							try {
+								FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AdminView.fxml"));
+								AdminController AdminController =  new AdminController(stage, model);
+
+								loader.setController(AdminController);
+								VBox root = loader.load();
+								
+								AdminController.showStage(root);
+								stage.close();
+							}catch (IOException e) {
+								message.setText(e.getMessage());
+							}
+														
+						}else{
+						
+						    try {
+							    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomeView.fxml"));
+							    HomeController homeController = new HomeController(stage, model);
 							
-							loader.setController(homeController);
-							VBox root = loader.load();
+							    loader.setController(homeController);
+							    VBox root = loader.load();
 	
-							homeController.showStage(root);
-							stage.close();
-						}catch (IOException e) {
-							message.setText(e.getMessage());
-						}
+							    homeController.showStage(root);
+							    stage.close();
+						    }catch (IOException e) {
+							    message.setText(e.getMessage());
+					     	}
+						    }	
 						
 					} else {
 						message.setText("Wrong username or password");
