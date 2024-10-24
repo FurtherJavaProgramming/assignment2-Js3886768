@@ -3,9 +3,13 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="450.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="450.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar fx:id="menu" prefHeight="25.0" prefWidth="870.0" VBox.vgrow="NEVER">
       <menus>
@@ -13,9 +17,43 @@
               <items>
                 <MenuItem fx:id="viewProfile" mnemonicParsing="false" text="View my profile" />
                   <MenuItem fx:id="updateProfile" mnemonicParsing="false" text="Update my profile" />
+                  <MenuItem fx:id="viewProfile1" mnemonicParsing="false" text="Log out" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Books">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Add Books to cart" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Cart">
+              <items>
+                <MenuItem mnemonicParsing="false" text="View Cart" />
+                  <MenuItem mnemonicParsing="false" text="Checkout" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Orders">
+              <items>
+                <MenuItem mnemonicParsing="false" text="View Orders" />
+                  <MenuItem mnemonicParsing="false" text="Export Orders" />
               </items>
             </Menu>
       </menus>
     </MenuBar>
+      <SplitPane dividerPositions="0.4446902654867256" prefHeight="338.0" prefWidth="544.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TextArea fx:id="dashboard" editable="false" layoutY="-1.0" prefHeight="337.0" prefWidth="238.0" text="Hi User" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+        </items>
+      </SplitPane>
+      <VBox prefHeight="47.0" prefWidth="544.0" />
+      <HBox prefHeight="15.0" prefWidth="544.0">
+         <children>
+            <HBox prefHeight="40.0" prefWidth="74.0" />
+         </children>
+      </HBox>
   </children>
 </VBox>

@@ -3,9 +3,11 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Model;
+import model.User;
 
 public class HomeController {
 	private Model model;
@@ -15,17 +17,21 @@ public class HomeController {
 	private MenuItem viewProfile; // Corresponds to the Menu item "viewProfile" in HomeView.fxml
 	@FXML
 	private MenuItem updateProfile; // // Corresponds to the Menu item "updateProfile" in HomeView.fxml
+	@FXML
+	private TextArea dashboard;
+	
 	
 	public HomeController(Stage parentStage, Model model) {
 		this.stage = new Stage();
 		this.parentStage = parentStage;
 		this.model = model;
+	
+		
 	}
 	
 	// Add your code to complete the functionality of the program
-	
-	
-	
+	@FXML
+
 	
 	
 	public void showStage(Pane root) {
@@ -34,5 +40,8 @@ public class HomeController {
 		stage.setResizable(false);
 		stage.setTitle("Home");
 		stage.show();
+		dashboard.setText("hi " + model.getCurrentUser().getUsername());
+	
+	
 	}
 }
