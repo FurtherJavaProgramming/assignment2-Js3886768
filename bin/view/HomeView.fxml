@@ -22,7 +22,8 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Books">
               <items>
-                <MenuItem  fx:id="addCart" mnemonicParsing="false" text="Add Books to cart" />
+                <MenuItem fx:id="addCart" mnemonicParsing="false" text="Add Books to cart" />
+                  <MenuItem fx:id="viewallbooks" mnemonicParsing="false" text="View all books" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Cart">

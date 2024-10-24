@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="450.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar fx:id="menu" prefHeight="25.0" prefWidth="870.0" VBox.vgrow="NEVER">
+      <menus>
+            <Menu fx:id="profile" mnemonicParsing="false" text="Home">
+              <items>
+                <MenuItem fx:id="viewProfile" mnemonicParsing="false" text="Return Home" />
+              </items>
+            </Menu>
+      </menus>
+    </MenuBar>
+      <AnchorPane prefHeight="426.0" prefWidth="544.0">
+         <children>
+            <TableView fx:id="bookView" layoutX="53.0" layoutY="70.0" prefHeight="284.0" prefWidth="438.0">
+              <columns>
+                <TableColumn fx:id="titlecol" prefWidth="192.800048828125" text="Title" />
+                <TableColumn fx:id="authorcol" prefWidth="101.5999755859375" text="Author" />
+                  <TableColumn fx:id="pricecol" prefWidth="76.0" text="Copies" />
+                  <TableColumn fx:id="quantitycol" prefWidth="68.79998779296875" text="Price $" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+  </children>
+</VBox>

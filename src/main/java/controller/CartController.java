@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Model;
 
+
 public class CartController {
 	private Model model;
 	private Stage stage;
@@ -19,10 +20,12 @@ public class CartController {
 	private MenuItem logOut;
 	
 	
+	
 	public CartController(Stage parentStage, Model model) {
 		this.stage = new Stage();
 		this.parentStage = parentStage;
 		this.model = model;
+		
 	}
 	
 	// Add your code to complete the functionality of the program

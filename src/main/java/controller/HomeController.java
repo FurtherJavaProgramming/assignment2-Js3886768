@@ -28,6 +28,8 @@ public class HomeController {
 	@FXML
 	private MenuItem addCart;
 	@FXML
+	private MenuItem viewallbooks;
+	@FXML
 	private TextArea dashboard;
 	
 	
@@ -102,6 +104,27 @@ public class HomeController {
 			VBox root = loader.load();
 			
 			CartController.showStage(root);
+			
+			
+			
+			stage.close();
+		} catch (IOException e) {
+			//message.setText(e.getMessage());
+			
+			
+		}});
+	
+	viewallbooks.setOnAction(event -> {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/BooksView.fxml"));
+			
+			// Customize controller instance
+			BooksController BooksController =  new BooksController(stage, model);
+
+			loader.setController(BooksController);
+			VBox root = loader.load();
+			
+			BooksController.showStage(root);
 			
 			
 			
