@@ -17,7 +17,7 @@
               <items>
                 <MenuItem fx:id="viewProfile" mnemonicParsing="false" text="View my profile" />
                   <MenuItem fx:id="updateProfile" mnemonicParsing="false" text="Update my profile" />
-                  <MenuItem fx:id="viewProfile1" mnemonicParsing="false" text="Log out" />
+                  <MenuItem fx:id="logOut" mnemonicParsing="false" text="Log out" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Books">

@@ -22,6 +22,8 @@ public class HomeController {
 	@FXML
 	private MenuItem updateProfile; // // Corresponds to the Menu item "updateProfile" in HomeView.fxml
 	@FXML
+	private MenuItem logOut;
+	@FXML
 	private TextArea dashboard;
 	
 	
@@ -56,7 +58,14 @@ public class HomeController {
 			stage.close();
 		} catch (IOException e) {
 			//message.setText(e.getMessage());
+			
+			
 		}});
+	logOut.setOnAction(event -> {
+		stage.close();
+		parentStage.show();
+	});
+	
 }
 
 
