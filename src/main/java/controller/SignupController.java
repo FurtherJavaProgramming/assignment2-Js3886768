@@ -59,7 +59,7 @@ public class SignupController {
 				}
 				
 			} else {
-				status.setText("Empty username or password");
+				status.setText("Empty username, password, Firstname or lastname");
 				status.setTextFill(Color.RED);
 			}
 		});

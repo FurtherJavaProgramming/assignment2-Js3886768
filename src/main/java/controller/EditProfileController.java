@@ -42,15 +42,19 @@ public class EditProfileController {
 	@FXML
 	public void initialize() {
 		createUser.setOnAction(event -> {
-			if (!username.getText().isEmpty() && !password.getText().isEmpty() && !firstname.getText().isEmpty() && !lastname.getText().isEmpty()) {
+		
 				User user;
 				try {
-					user = model.getUserDao().createUser(username.getText(), password.getText(),firstname.getText(),lastname.getText());
-					if (user != null) {
-						status.setText("Created " + user.getUsername());
+					user = model.getUserDao().setUser(model.getCurrentUser().getUsername(), password.getText(),firstname.getText(),lastname.getText());
+					if (password.getText().isEmpty() && firstname.getText().isEmpty() && lastname.getText().isEmpty()) {
+						status.setText("No input Cannot Update");
+						status.setTextFill(Color.RED);
+					}
+					else if (user != null) {
+						status.setText("Updated " + user.getUsername());
 						status.setTextFill(Color.GREEN);
 					} else {
-						status.setText("Cannot create user");
+						status.setText("Cannot update");
 						status.setTextFill(Color.RED);
 					}
 				} catch (SQLException e) {
@@ -58,10 +62,8 @@ public class EditProfileController {
 					status.setTextFill(Color.RED);
 				}
 				
-			} else {
-				status.setText("Empty username or password");
-				status.setTextFill(Color.RED);
-			}
+	
+			
 		});
 
 		close.setOnAction(event -> {
