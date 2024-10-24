@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Model;
 
-public class AdminController {
+public class CartController {
 	private Model model;
 	private Stage stage;
 	private Stage parentStage;
@@ -15,8 +15,11 @@ public class AdminController {
 	private MenuItem viewProfile; // Corresponds to the Menu item "viewProfile" in HomeView.fxml
 	@FXML
 	private MenuItem updateProfile; // // Corresponds to the Menu item "updateProfile" in HomeView.fxml
+	@FXML
+	private MenuItem logOut;
 	
-	public AdminController(Stage parentStage, Model model) {
+	
+	public CartController(Stage parentStage, Model model) {
 		this.stage = new Stage();
 		this.parentStage = parentStage;
 		this.model = model;
@@ -24,9 +27,16 @@ public class AdminController {
 	
 	// Add your code to complete the functionality of the program
 	
+	
 	@FXML
 	public void initialize() {
+		logOut.setOnAction(event -> {
+		stage.close();
+		parentStage.show();
+	});
+	
 	}
+	
 	
 	
 	

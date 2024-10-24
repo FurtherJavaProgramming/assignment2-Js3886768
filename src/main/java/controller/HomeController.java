@@ -24,6 +24,10 @@ public class HomeController {
 	@FXML
 	private MenuItem logOut;
 	@FXML
+	private MenuItem viewCart;
+	@FXML
+	private MenuItem addCart;
+	@FXML
 	private TextArea dashboard;
 	
 	
@@ -65,6 +69,48 @@ public class HomeController {
 		stage.close();
 		parentStage.show();
 	});
+	
+	viewCart.setOnAction(event -> {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CartView.fxml"));
+			
+			// Customize controller instance
+			CartController CartController =  new CartController(stage, model);
+
+			loader.setController(CartController);
+			VBox root = loader.load();
+			
+			CartController.showStage(root);
+			
+			
+			
+			stage.close();
+		} catch (IOException e) {
+			//message.setText(e.getMessage());
+			
+			
+		}});
+	
+	addCart.setOnAction(event -> {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CartView.fxml"));
+			
+			// Customize controller instance
+			CartController CartController =  new CartController(stage, model);
+
+			loader.setController(CartController);
+			VBox root = loader.load();
+			
+			CartController.showStage(root);
+			
+			
+			
+			stage.close();
+		} catch (IOException e) {
+			//message.setText(e.getMessage());
+			
+			
+		}});
 	
 }
 

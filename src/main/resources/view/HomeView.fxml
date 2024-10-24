@@ -22,12 +22,12 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Books">
               <items>
-                <MenuItem mnemonicParsing="false" text="Add Books to cart" />
+                <MenuItem  fx:id="addCart" mnemonicParsing="false" text="Add Books to cart" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Cart">
               <items>
-                <MenuItem mnemonicParsing="false" text="View Cart" />
+                <MenuItem fx:id="viewCart" mnemonicParsing="false" text="View Cart" />
                   <MenuItem mnemonicParsing="false" text="Checkout" />
               </items>
             </Menu>
