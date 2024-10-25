@@ -15,6 +15,7 @@ import model.User;
 public class BookDaoImpl implements BookDao {
 	private final String TABLE_NAME = "books";
 	 private ObservableList<Book> dataBooks;
+	 private ObservableList<String> dataTitle;
 
 	public BookDaoImpl() {
 		
@@ -57,6 +58,29 @@ public class BookDaoImpl implements BookDao {
 	        }catch (SQLException ex) {}
 			}
 		return dataBooks;
+		
+			}
+	
+	@Override
+	public ObservableList<String> getBookTitleList() throws SQLException {
+		
+		String sql = "SELECT booktitle FROM books";
+		 dataTitle = FXCollections.observableArrayList();
+		try (Connection connection = Database.getConnection(); 
+				PreparedStatement stmt = connection.prepareStatement(sql);) {
+			try (ResultSet rs = stmt.executeQuery()){
+	            while(rs.next()) {
+	                dataTitle.add(rs.getString("booktitle"));
+	                             
+	            } 
+	            return dataTitle;
+	            
+	            
+	           
+
+	        }catch (SQLException ex) {}
+			}
+		return dataTitle;
 		
 			}
 

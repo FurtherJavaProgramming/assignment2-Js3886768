@@ -1,7 +1,10 @@
 package controller;
 
+import java.sql.SQLException;
+
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -18,7 +21,8 @@ public class CartController {
 	private MenuItem updateProfile; // // Corresponds to the Menu item "updateProfile" in HomeView.fxml
 	@FXML
 	private MenuItem logOut;
-	
+	@FXML
+	private ComboBox<String> choiceComboBox;
 	
 	
 	public CartController(Stage parentStage, Model model) {
@@ -37,6 +41,14 @@ public class CartController {
 		stage.close();
 		parentStage.show();
 	});
+		
+		
+		try {
+			choiceComboBox.setItems(model.getBookDao().getBookTitleList());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 	}
 	

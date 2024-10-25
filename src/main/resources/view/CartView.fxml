@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -33,7 +33,6 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="337.0">
                <children>
-                  <ChoiceBox layoutX="119.0" layoutY="61.0" prefWidth="150.0" />
                   <Label layoutX="21.0" layoutY="60.0" prefHeight="26.0" prefWidth="72.0" text="Select book" />
                   <Label layoutX="21.0" layoutY="228.0" prefHeight="18.0" prefWidth="80.0" text="Price per book" />
                   <TextField layoutX="119.0" layoutY="99.0" />
@@ -42,6 +41,7 @@
                   <Label layoutX="119.0" layoutY="188.0" prefHeight="18.0" prefWidth="150.0" text="Label" />
                   <Label layoutX="119.0" layoutY="228.0" prefHeight="18.0" prefWidth="150.0" text="Label" />
                   <Button layoutX="194.0" layoutY="134.0" mnemonicParsing="false" text="Add to Cart" />
+                  <ComboBox fx:id="choiceComboBox" layoutX="119.0" layoutY="60.0" prefWidth="150.0" />
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="250.0">
                <children>
@@ -51,8 +51,9 @@
                            <children>
                               <TableView prefHeight="392.0" prefWidth="253.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="C1" />
-                                  <TableColumn prefWidth="75.0" text="C2" />
+                                  <TableColumn prefWidth="104.7999878525734" text="Title" />
+                                  <TableColumn prefWidth="82.4000244140625" text="Quantity" />
+                                    <TableColumn prefWidth="49.60003662109375" text="Price" />
                                 </columns>
                               </TableView>
                            </children>

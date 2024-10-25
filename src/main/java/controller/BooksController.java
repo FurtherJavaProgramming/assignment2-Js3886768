@@ -83,7 +83,7 @@ public class BooksController implements Initializable {
 	      
 	       
 	        bookView.setItems(dataBooks);
-	        bookView.getColumns().setAll(titlecol,authorcol,pricecol,quantitycol);
+	     
 	        
 	        
 	       

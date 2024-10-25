@@ -16,5 +16,6 @@ public interface BookDao {
 	void setup() throws SQLException;
 	Book getBook(String booktitle, String author, int copies, int price, int sold) throws SQLException;
 	ObservableList<Book> getBookList() throws SQLException;
+	ObservableList<String> getBookTitleList() throws SQLException;
 
 }
