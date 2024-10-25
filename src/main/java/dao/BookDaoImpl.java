@@ -83,6 +83,38 @@ public class BookDaoImpl implements BookDao {
 		return dataTitle;
 		
 			}
+	@Override
+	public Book getBook(String booktitle) throws SQLException {
+		String sql = "SELECT * FROM books WHERE booktitle = ?";
+		 dataTitle = FXCollections.observableArrayList();
+			try (Connection connection = Database.getConnection();
+					PreparedStatement stmt = connection.prepareStatement(sql);) {
+				
+				stmt.setString(1, booktitle);
+			
+		
+
+				try (ResultSet rs = stmt.executeQuery()) {
+				    Book bk = new Book();
+				  
+				    bk.setbooktitle(rs.getString("booktitle"));
+				    bk.setauthor(rs.getString("Author"));
+				    bk.setprice(rs.getInt("price"));
+				    bk.setcopies(rs.getInt("copies"));
+				    bk.setsold(rs.getInt("sold"));
+				    return bk;
+				}
+				
+	            
+	            
+	           
+
+	        }catch (SQLException ex) {}
+			return new Book();
+			}
+	
+		
+			
 
 	@Override
 	public Book getBook(String booktitle, String author, int copies, int price, int sold) throws SQLException {

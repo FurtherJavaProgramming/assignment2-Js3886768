@@ -14,7 +14,7 @@ public class Book {
 
 	public Book() {
 	}
-	
+
 	public Book(SimpleStringProperty booktitle, SimpleStringProperty author, SimpleIntegerProperty copies, SimpleIntegerProperty price, SimpleIntegerProperty sold) {
 		this.booktitle = booktitle;
 		this.author = author;

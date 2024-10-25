@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import model.Book;
+import model.Cart;
 
 /**
  * A data access object (DAO) is a pattern that provides an abstract interface 
@@ -12,11 +13,10 @@ import model.Book;
  * the DAO maps application calls to the persistence layer and provides some specific data operations 
  * without exposing details of the database. 
  */
-public interface BookDao {
+public interface CartDao {
 	void setup() throws SQLException;
-	Book getBook(String booktitle, String author, int copies, int price, int sold) throws SQLException;
-	Book getBook(String booktitle) throws SQLException;
-	ObservableList<Book> getBookList() throws SQLException;
-	ObservableList<String> getBookTitleList() throws SQLException;
+	Cart createCart(String booktitle, String username, int copies, int price, int sold) throws SQLException;
+	ObservableList<Cart> getCartList(String username) throws SQLException;
+
 
 }

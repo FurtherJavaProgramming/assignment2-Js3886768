@@ -4,12 +4,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import dao.BookDao;
 import dao.BookDaoImpl;
+import dao.CartDao;
+import dao.CartDaoImpl;
 import dao.UserDao;
 import dao.UserDaoImpl;
 import javafx.collections.ObservableList;
 
 public class Model {
 	private UserDao userDao;
+	private CartDao cartDao;
 	private User currentUser; 
 	private Book book;
 	private BookDao bookDao;
@@ -18,11 +21,13 @@ public class Model {
 	public Model() {
 		userDao = new UserDaoImpl();
 		bookDao = new BookDaoImpl();
+		cartDao = new CartDaoImpl();
 	}
 	
 	public void setup() throws SQLException {
 		userDao.setup();
 		bookDao.setup();
+		cartDao.setup();
 	}
 	public UserDao getUserDao() {
 		return userDao;
@@ -30,6 +35,10 @@ public class Model {
 	
 	public BookDao getBookDao() {
 		return bookDao;
+	}
+	
+	public CartDao getCartDao() {
+		return cartDao;
 	}
 	
 	public User getCurrentUser() {

@@ -1,15 +1,24 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Comparator;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Book;
 import model.Model;
 import model.User;
 
@@ -31,6 +40,11 @@ public class HomeController {
 	private MenuItem viewallbooks;
 	@FXML
 	private TextArea dashboard;
+	@FXML
+	private TableColumn<Book, String> homeTableCol;
+	@FXML
+	private TableView<Book> homeTableView;
+	private ObservableList <Book> dataBooks;
 	
 	
 	public HomeController(Stage parentStage, Model model) {
@@ -44,6 +58,37 @@ public class HomeController {
 	// Add your code to complete the functionality of the program
 	@FXML
 	public void initialize() {
+		
+		 homeTableCol.setCellValueFactory(
+	                new PropertyValueFactory<Book, String>("booktitle")
+	        );
+	        
+	        
+	        dataBooks = FXCollections.observableArrayList();
+	       
+	    
+	       
+	        try {
+				dataBooks.addAll(model.getBookDao().getBookList());
+				Comparator<Book> bookComparator = Comparator.comparing(Book::getsold);
+				Collections.sort(dataBooks, bookComparator);
+				dataBooks.remove(0);
+				dataBooks.remove(0);
+				dataBooks.remove(0);
+				dataBooks.remove(0);
+				Collections.reverse(dataBooks);
+				
+				
+			
+			
+				homeTableView.setItems(dataBooks);;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	      
+	       
+	        homeTableView.setItems(dataBooks);
 	
 	
 	

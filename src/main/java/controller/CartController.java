@@ -2,12 +2,22 @@ package controller;
 
 import java.sql.SQLException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.Book;
+import model.Cart;
 import model.Model;
 
 
@@ -23,6 +33,24 @@ public class CartController {
 	private MenuItem logOut;
 	@FXML
 	private ComboBox<String> choiceComboBox;
+	@FXML
+	private Label priceLabel;
+	@FXML
+	private Label stockLabel;
+	@FXML 
+	private Button addToCartButton;
+	@FXML 
+	private TextField quantityTextField;
+	@FXML
+	private TableColumn<Cart, String> cartTitleCol;
+	@FXML
+	private TableColumn<Cart, Integer> cartQuantityCol;
+	@FXML
+	private TableColumn<Cart, Integer> cartPriceCol;
+	@FXML
+	private TableView<Cart> cartTableView;
+	
+	private ObservableList <Cart> dataCart;
 	
 	
 	public CartController(Stage parentStage, Model model) {
@@ -37,6 +65,42 @@ public class CartController {
 	
 	@FXML
 	public void initialize() {
+         
+    		
+    		
+    		
+
+	        cartTitleCol.setCellValueFactory(
+	                new PropertyValueFactory<Cart, String>("booktitle")
+	        );
+	        cartQuantityCol.setCellValueFactory(
+	                new PropertyValueFactory<Cart, Integer>("copies")
+	        );
+	        
+	        cartPriceCol.setCellValueFactory(
+	                new PropertyValueFactory<Cart, Integer>("price")
+	        );
+	    
+	        
+	        dataCart = FXCollections.observableArrayList();
+	    try {
+	       
+	    
+	       
+	        dataCart.addAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
+	      
+	       
+	        cartTableView.setItems(dataCart);
+	     
+	        
+	        
+	       
+	        
+		}catch (SQLException ex) {
+	            
+	       }
+	    
+	    
 		logOut.setOnAction(event -> {
 		stage.close();
 		parentStage.show();
@@ -49,8 +113,35 @@ public class CartController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		choiceComboBox.setOnAction(event -> {
+			Book bk = new Book();
+			try {
+				bk = (model.getBookDao().getBook(choiceComboBox.getValue().toString()));
+				priceLabel.setText(Integer.toString(bk.getprice()));
+				stockLabel.setText(Integer.toString(bk.getcopies()));
+			} catch (SQLException e) {
+				
+				
+				e.printStackTrace();
+			}
+			
+			
+
+		});
+		addToCartButton.setOnAction(event -> {
+			try {
+				Book bk = new Book();
+				bk = (model.getBookDao().getBook(choiceComboBox.getValue().toString()));
+				model.getCartDao().createCart(choiceComboBox.getValue().toString(), model.getCurrentUser().getUsername(), Integer.parseInt(quantityTextField.getText()),bk.getprice() , 0);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
 	
 	}
+	
 	
 	
 	
