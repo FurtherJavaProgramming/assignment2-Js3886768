@@ -100,6 +100,51 @@ public class CartDaoImpl implements CartDao {
 	        stmt.executeUpdate();
 		
 	}}
+	@Override
+	public void addQuantityCart(int rowid,int copies)throws SQLException {
+		String sql = "UPDATE [cart]" +
+				"SET quantity = quantity + ?" +
+				"WHERE rowid = ?" ;
+		try (Connection connection = Database.getConnection(); 
+				PreparedStatement stmt = connection.prepareStatement(sql);) {
+			
+			stmt.setString(1, Integer.toString(copies));
+			stmt.setString(2, Integer.toString(rowid));
+	        stmt.executeUpdate();
+		
+	}}
+	@Override
+	public Cart getCart(String booktitle, String username) throws SQLException{
+		String sql = "SELECT booktitle, username, quantity, price, rowid FROM cart WHERE username = ? AND booktitle =? ";
+		try (Connection connection = Database.getConnection(); 
+				PreparedStatement stmt = connection.prepareStatement(sql);) {
+			stmt.setString(1, username);
+			stmt.setString(2, booktitle);
+			try (ResultSet rs = stmt.executeQuery()){
+	            while(rs.next()) {
+	                Cart ct = new Cart();
+	                ct.setbooktitle(rs.getString("booktitle"));
+	                ct.setusername(rs.getString("username"));
+	                ct.setcopies(rs.getInt("quantity"));
+	                ct.setprice(rs.getInt("price"));
+	                ct.setrowid(rs.getInt("rowid"));
+	                return ct;
+	                               
+	            } 
+	           
+	            
+	            
+	           
+
+	        }catch (SQLException ex) {}
+			}
+		
+		
+			
+		
+		return new Cart("nil");
+		
+	}
 	
 	
 	

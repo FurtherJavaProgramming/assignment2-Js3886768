@@ -38,6 +38,8 @@ public class CartController {
 	@FXML
 	private Label priceLabel;
 	@FXML
+	private Label priceTotalLabel;
+	@FXML
 	private Label stockLabel;
 	@FXML
 	private Label errorLabel;
@@ -104,6 +106,10 @@ public class CartController {
 	      
 	       
 	        cartTableView.setItems(dataCart);
+	        dataCart.forEach((Cart cart) -> { 
+	             priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies())+Integer.parseInt(priceTotalLabel.getText())));
+	        });
+	       
 	     
 	        
 	        
@@ -112,6 +118,7 @@ public class CartController {
 		}catch (SQLException ex) {
 	            
 	       }
+	    
 	    
 	    
 		logOut.setOnAction(event -> {
@@ -142,14 +149,42 @@ public class CartController {
 			
 
 		});
+		dataCart.forEach((Cart cart) -> { 
+            priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies()+Integer.parseInt(priceTotalLabel.getText()))));
+       });
+      
 		addToCartButton.setOnAction(event -> {
 			try {
 				Book bk = new Book();
+				Cart ct = new Cart();
 				bk = (model.getBookDao().getBook(choiceComboBox.getValue().toString()));
+				ct =(model.getCartDao().getCart(bk.getbooktitle(), model.getCurrentUser().getUsername()));
+			
 				if (bk.getcopies() >= Integer.parseInt(quantityTextField.getText())){
-					model.getCartDao().createCart(choiceComboBox.getValue().toString(), model.getCurrentUser().getUsername(), Integer.parseInt(quantityTextField.getText()),bk.getprice() , 0);
-					dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
-			        cartTableView.setItems(dataCart);
+					if(ct.getbooktitle().equals(bk.getbooktitle())){ 
+						if (bk.getcopies() >= (Integer.parseInt(quantityTextField.getText()))+ct.getcopies()){
+						    model.getCartDao().addQuantityCart(ct.getrowid(),Integer.parseInt(quantityTextField.getText()));
+						    dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
+				            cartTableView.setItems(dataCart);
+				            priceTotalLabel.setText("0");
+					        dataCart.forEach((Cart cart) -> { 
+					             priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies())+Integer.parseInt(priceTotalLabel.getText())));
+					        });
+					   }else {
+						    errorLabel.setText("Error : Not enough Avaliable stock");
+						    errorLabel.setTextFill(Color.RED);
+					   }
+						
+					}else {
+					
+					    model.getCartDao().createCart(choiceComboBox.getValue().toString(), model.getCurrentUser().getUsername(), Integer.parseInt(quantityTextField.getText()),bk.getprice() , 0);
+					    dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
+			            cartTableView.setItems(dataCart);
+			            priceTotalLabel.setText("0");
+			            dataCart.forEach((Cart cart) -> { 
+			                 priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies())+Integer.parseInt(priceTotalLabel.getText())));
+			            });
+					    }
 				}else {
 					errorLabel.setText("Error : Not enough Avaliable stock");
 					errorLabel.setTextFill(Color.RED);
@@ -178,6 +213,10 @@ public class CartController {
 				model.getCartDao().removeCart(ct.getrowid());
 				dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
 		        cartTableView.setItems(dataCart);
+		        priceTotalLabel.setText("0");
+		        dataCart.forEach((Cart cart) -> { 
+		             priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies())+Integer.parseInt(priceTotalLabel.getText())));
+		        });
 			} catch (SQLException e) {
 				errorLabel.setText(e.getMessage());
 				errorLabel.setTextFill(Color.RED);
@@ -194,10 +233,14 @@ public class CartController {
 			Book bk = new Book();
 			try {
 				bk = model.getBookDao().getBook(ct.getbooktitle());
-				if (bk.getcopies() >= Integer.parseInt(updateQuantityTextField.getText())){
+				if (bk.getcopies() >= (Integer.parseInt(updateQuantityTextField.getText()))+ct.getcopies()){
 				    model.getCartDao().updateQuantityCart(ct.getrowid(),Integer.parseInt(updateQuantityTextField.getText()));
 				    dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
 		            cartTableView.setItems(dataCart);
+		            priceTotalLabel.setText("0");
+			        dataCart.forEach((Cart cart) -> { 
+			             priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies())+Integer.parseInt(priceTotalLabel.getText())));
+			        });
 			   }else {
 				    errorLabel.setText("Error : Not enough Avaliable stock");
 				    errorLabel.setTextFill(Color.RED);

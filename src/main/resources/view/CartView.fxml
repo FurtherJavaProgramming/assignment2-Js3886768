@@ -74,7 +74,7 @@
                            <children>
                               <VBox prefHeight="20.0" prefWidth="49.0" />
                               <Label prefHeight="18.0" prefWidth="78.0" text="Total Price :  $" />
-                              <Label text="1" />
+                              <Label fx:id="priceTotalLabel" text="0" />
                            </children></HBox>
                         <HBox layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="254.0">
                            <children>

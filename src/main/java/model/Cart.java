@@ -33,6 +33,10 @@ public class Cart {
 		
 	}
 	
+	public Cart(String booktitle) {
+		this.booktitle.set(booktitle);
+	}
+	
 
 	public String getbooktitle() {
 		return booktitle.get();
