@@ -87,6 +87,19 @@ public class CartDaoImpl implements CartDao {
 			stmt.execute();
 			
 		}}
+	@Override
+	public void updateQuantityCart(int rowid,int copies)throws SQLException {
+		String sql = "UPDATE [cart]" +
+				"SET quantity = ?" +
+				"WHERE rowid = ?" ;
+		try (Connection connection = Database.getConnection(); 
+				PreparedStatement stmt = connection.prepareStatement(sql);) {
+			
+			stmt.setString(1, Integer.toString(copies));
+			stmt.setString(2, Integer.toString(rowid));
+	        stmt.executeUpdate();
+		
+	}}
 	
 	
 	

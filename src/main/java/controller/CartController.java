@@ -16,6 +16,7 @@ import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Book;
 import model.Cart;
@@ -39,11 +40,19 @@ public class CartController {
 	@FXML
 	private Label stockLabel;
 	@FXML
+	private Label errorLabel;
+	@FXML
 	private Button removeButton;
 	@FXML 
 	private Button addToCartButton;
 	@FXML 
+	private Button updateQuantityButton;
+	@FXML 
+	private Button checkoutButton;
+	@FXML 
 	private TextField quantityTextField;
+	@FXML
+	private TextField updateQuantityTextField;
 	@FXML
 	private TableColumn<Cart, String> cartTitleCol;
 	@FXML
@@ -137,12 +146,23 @@ public class CartController {
 			try {
 				Book bk = new Book();
 				bk = (model.getBookDao().getBook(choiceComboBox.getValue().toString()));
-				model.getCartDao().createCart(choiceComboBox.getValue().toString(), model.getCurrentUser().getUsername(), Integer.parseInt(quantityTextField.getText()),bk.getprice() , 0);
-				dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
-		        cartTableView.setItems(dataCart);
+				if (bk.getcopies() >= Integer.parseInt(quantityTextField.getText())){
+					model.getCartDao().createCart(choiceComboBox.getValue().toString(), model.getCurrentUser().getUsername(), Integer.parseInt(quantityTextField.getText()),bk.getprice() , 0);
+					dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
+			        cartTableView.setItems(dataCart);
+				}else {
+					errorLabel.setText("Error : Not enough Avaliable stock");
+					errorLabel.setTextFill(Color.RED);
+				}
+				
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				errorLabel.setText(e.getMessage());
+				errorLabel.setTextFill(Color.RED);
+			}
+			catch (NumberFormatException nfe ) {
+				errorLabel.setText("ERROR input only numbers");
+				errorLabel.setTextFill(Color.RED);
+				
 			}
 		});
 		
@@ -159,8 +179,37 @@ public class CartController {
 				dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
 		        cartTableView.setItems(dataCart);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				errorLabel.setText(e.getMessage());
+				errorLabel.setTextFill(Color.RED);
+			}
+		});
+		updateQuantityButton.setOnAction(event -> {
+			cartTableView.getSelectionModel();
+			TableViewSelectionModel<Cart> selectionModel = 
+				    cartTableView.getSelectionModel();
+			ObservableList<Cart> selectedItems = 
+				    selectionModel.getSelectedItems();
+			Cart ct = new Cart();
+			ct = selectedItems.getFirst();
+			Book bk = new Book();
+			try {
+				bk = model.getBookDao().getBook(ct.getbooktitle());
+				if (bk.getcopies() >= Integer.parseInt(updateQuantityTextField.getText())){
+				    model.getCartDao().updateQuantityCart(ct.getrowid(),Integer.parseInt(updateQuantityTextField.getText()));
+				    dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
+		            cartTableView.setItems(dataCart);
+			   }else {
+				    errorLabel.setText("Error : Not enough Avaliable stock");
+				    errorLabel.setTextFill(Color.RED);
+			   }
+			}catch (SQLException e) {
+				errorLabel.setText(e.getMessage());
+				errorLabel.setTextFill(Color.RED);
+			
+			}catch (NumberFormatException nfe ) {
+				errorLabel.setText("ERROR input only numbers");
+				errorLabel.setTextFill(Color.RED);
+				
 			}
 		});
 	
@@ -171,7 +220,7 @@ public class CartController {
 	
 	
 	public void showStage(Pane root) {
-		Scene scene = new Scene(root, 600, 400);
+		Scene scene = new Scene(root, 600, 450);
 		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.setTitle("Home");

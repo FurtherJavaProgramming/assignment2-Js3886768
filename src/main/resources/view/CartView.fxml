@@ -68,7 +68,7 @@
                         </AnchorPane>
                      </content>
                   </ScrollPane>
-                  <VBox layoutX="-5.0" layoutY="284.0" prefHeight="109.0" prefWidth="254.0">
+                  <VBox layoutX="-5.0" layoutY="284.0" prefHeight="110.0" prefWidth="278.0">
                      <children>
                         <HBox prefHeight="20.0" prefWidth="254.0">
                            <children>
@@ -85,23 +85,23 @@
                                  </children>
                               </VBox>
                               <VBox prefHeight="31.0" prefWidth="19.0" />
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Checkout" />
+                              <Button fx:id="checkoutButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Checkout" />
                            </children>
                         </HBox>
                         <HBox layoutX="10.0" layoutY="41.0" prefHeight="31.0" prefWidth="254.0">
                            <children>
                               <VBox prefHeight="31.0" prefWidth="12.0" />
-                              <TextField prefHeight="26.0" prefWidth="115.0" promptText="number of copies" />
+                              <TextField fx:id="updateQuantityTextField" prefHeight="26.0" prefWidth="115.0" promptText="number of copies" />
                               <VBox prefHeight="31.0" prefWidth="18.0" />
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" text="Update quantity" />
+                              <Button fx:id="updateQuantityButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" text="Update quantity" />
                            </children>
                         </HBox>
-                        <HBox prefHeight="25.0" prefWidth="254.0">
+                        <HBox prefHeight="26.0" prefWidth="263.0">
                            <children>
                               <HBox prefHeight="26.0" prefWidth="42.0" />
-                              <HBox prefHeight="26.0" prefWidth="190.0">
+                              <HBox prefHeight="26.0" prefWidth="241.0">
                                  <children>
-                                    <Label prefHeight="26.0" prefWidth="157.0" />
+                                    <Label fx:id="errorLabel" prefHeight="26.0" prefWidth="232.0" />
                                  </children>
                               </HBox>
                            </children>

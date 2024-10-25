@@ -18,6 +18,8 @@ public interface CartDao {
 	Cart createCart(String booktitle, String username, int copies, int price, int sold) throws SQLException;
 	ObservableList<Cart> getCartList(String username) throws SQLException;
 	void removeCart(int rowid)throws SQLException;
+	void updateQuantityCart(int rowid,int copies)throws SQLException;
+
 
 
 }
