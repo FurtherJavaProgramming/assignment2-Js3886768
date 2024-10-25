@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -80,7 +81,7 @@ public class CartController {
 	
 	@FXML
 	public void initialize() {
-         
+		    priceTotalLabel.setText("0");
     		
     		
     		
@@ -104,7 +105,7 @@ public class CartController {
 	       
 	        dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
 	      
-	       
+	        priceTotalLabel.setText("0");
 	        cartTableView.setItems(dataCart);
 	        dataCart.forEach((Cart cart) -> { 
 	             priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies())+Integer.parseInt(priceTotalLabel.getText())));
@@ -198,6 +199,10 @@ public class CartController {
 				errorLabel.setText("ERROR input only numbers");
 				errorLabel.setTextFill(Color.RED);
 				
+			}catch (Exception Exception ) {
+				errorLabel.setText("ERROR : check selection ");
+				errorLabel.setTextFill(Color.RED);
+				
 			}
 		});
 		
@@ -228,10 +233,10 @@ public class CartController {
 				    cartTableView.getSelectionModel();
 			ObservableList<Cart> selectedItems = 
 				    selectionModel.getSelectedItems();
-			Cart ct = new Cart();
-			ct = selectedItems.getFirst();
-			Book bk = new Book();
 			try {
+			    Cart ct = new Cart();
+			    ct = selectedItems.getFirst();
+			    Book bk = new Book();
 				bk = model.getBookDao().getBook(ct.getbooktitle());
 				if (bk.getcopies() >= (Integer.parseInt(updateQuantityTextField.getText()))+ct.getcopies()){
 				    model.getCartDao().updateQuantityCart(ct.getrowid(),Integer.parseInt(updateQuantityTextField.getText()));
@@ -253,6 +258,14 @@ public class CartController {
 				errorLabel.setText("ERROR input only numbers");
 				errorLabel.setTextFill(Color.RED);
 				
+			}catch (NoSuchElementException exception ) {
+				errorLabel.setText("ERROR input only numbers");
+				errorLabel.setTextFill(Color.RED);
+				
+			}catch (Exception exception ) {
+				errorLabel.setText("ERROR input oly numbers");
+				errorLabel.setTextFill(Color.RED);
+				
 			}
 		});
 	
@@ -268,5 +281,6 @@ public class CartController {
 		stage.setResizable(false);
 		stage.setTitle("Home");
 		stage.show();
+		
 	}
 }
