@@ -50,7 +50,7 @@ public class CartDaoImpl implements CartDao {
 	@Override
 	public ObservableList<Cart> getCartList(String username) throws SQLException {
 		
-		String sql = "SELECT * FROM cart WHERE username = ?";
+		String sql = "SELECT booktitle, username, quantity, price, rowid FROM cart WHERE username = ?";
 		 dataCart = FXCollections.observableArrayList();
 		try (Connection connection = Database.getConnection(); 
 				PreparedStatement stmt = connection.prepareStatement(sql);) {
@@ -62,6 +62,7 @@ public class CartDaoImpl implements CartDao {
 	                ct.setusername(rs.getString("username"));
 	                ct.setcopies(rs.getInt("quantity"));
 	                ct.setprice(rs.getInt("price"));
+	                ct.setrowid(rs.getInt("rowid"));
 	                dataCart.add(ct);                
 	            } 
 	            return dataCart;
@@ -74,6 +75,19 @@ public class CartDaoImpl implements CartDao {
 		return dataCart;
 		
 			}
+	
+	@Override
+	public void removeCart(int rowid) throws SQLException {
+		
+		String sql = "DELETE FROM cart WHERE rowid = ?";
+		 dataCart = FXCollections.observableArrayList();
+		try (Connection connection = Database.getConnection(); 
+				PreparedStatement stmt = connection.prepareStatement(sql);) {
+			stmt.setString(1, Integer.toString(rowid));
+			stmt.execute();
+			
+		}}
+	
 	
 	
 }

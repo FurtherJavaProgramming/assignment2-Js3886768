@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
@@ -37,6 +38,8 @@ public class CartController {
 	private Label priceLabel;
 	@FXML
 	private Label stockLabel;
+	@FXML
+	private Button removeButton;
 	@FXML 
 	private Button addToCartButton;
 	@FXML 
@@ -50,8 +53,9 @@ public class CartController {
 	@FXML
 	private TableView<Cart> cartTableView;
 	
-	private ObservableList <Cart> dataCart;
 	
+	private ObservableList <Cart> dataCart;
+	private ObservableList <Cart> selectedItems;
 	
 	public CartController(Stage parentStage, Model model) {
 		this.stage = new Stage();
@@ -87,7 +91,7 @@ public class CartController {
 	       
 	    
 	       
-	        dataCart.addAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
+	        dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
 	      
 	       
 	        cartTableView.setItems(dataCart);
@@ -134,6 +138,26 @@ public class CartController {
 				Book bk = new Book();
 				bk = (model.getBookDao().getBook(choiceComboBox.getValue().toString()));
 				model.getCartDao().createCart(choiceComboBox.getValue().toString(), model.getCurrentUser().getUsername(), Integer.parseInt(quantityTextField.getText()),bk.getprice() , 0);
+				dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
+		        cartTableView.setItems(dataCart);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+		
+		removeButton.setOnAction(event -> {
+			cartTableView.getSelectionModel();
+			TableViewSelectionModel<Cart> selectionModel = 
+				    cartTableView.getSelectionModel();
+			ObservableList<Cart> selectedItems = 
+				    selectionModel.getSelectedItems();
+			Cart ct = new Cart();
+			ct = selectedItems.getFirst();
+			try {
+				model.getCartDao().removeCart(ct.getrowid());
+				dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
+		        cartTableView.setItems(dataCart);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

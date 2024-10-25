@@ -11,6 +11,7 @@ public class Cart {
     public  SimpleIntegerProperty copies = new SimpleIntegerProperty();
     public  SimpleIntegerProperty price = new SimpleIntegerProperty();
     public  SimpleIntegerProperty sold = new SimpleIntegerProperty();
+    public  SimpleIntegerProperty rowid = new SimpleIntegerProperty();
 
 	public Cart() {
 	}
@@ -51,6 +52,18 @@ public class Cart {
 	}
 	public SimpleIntegerProperty priceProperty() {
 		return price;
+	}
+	
+	public SimpleIntegerProperty rowidProperty() {
+		return rowid;
+	}
+	
+	public int getrowid() {
+		return rowid.get();
+	}
+	
+	public void setrowid(int rowid) {
+		this.rowid.set(rowid);
 	}
 	
 	

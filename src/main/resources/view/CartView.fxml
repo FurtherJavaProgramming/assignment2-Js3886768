@@ -37,31 +37,31 @@
                </children>
             </VBox>
          </children></HBox>
-      <SplitPane dividerPositions="0.5294985250737462" prefHeight="425.0" prefWidth="544.0">
+      <SplitPane dividerPositions="0.48156342182890843" prefHeight="425.0" prefWidth="544.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="337.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="392.0" prefWidth="263.0">
                <children>
                   <Label layoutX="21.0" layoutY="60.0" prefHeight="26.0" prefWidth="72.0" text="Select book" />
                   <Label layoutX="21.0" layoutY="228.0" prefHeight="18.0" prefWidth="80.0" text="Price per book:" />
-                  <TextField fx:id="quantityTextField" layoutX="119.0" layoutY="99.0" />
+                  <TextField fx:id="quantityTextField" layoutX="119.0" layoutY="99.0" prefHeight="26.0" prefWidth="126.0" />
                   <Label layoutX="21.0" layoutY="103.0" prefHeight="18.0" prefWidth="80.0" text="Input quantity" />
                   <Label layoutX="21.0" layoutY="187.0" prefHeight="18.0" prefWidth="86.0" text="Stock avaliable:" />
-                  <Label fx:id="priceLabel" layoutX="119.0" layoutY="188.0" prefHeight="18.0" prefWidth="150.0" text="" />
-                  <Label fx:id="stockLabel" layoutX="119.0" layoutY="228.0" prefHeight="18.0" prefWidth="150.0" text="" />
-                  <Button fx:id="addToCartButton" layoutX="194.0" layoutY="134.0" mnemonicParsing="false" text="Add to Cart" />
-                  <ComboBox fx:id="choiceComboBox" layoutX="119.0" layoutY="60.0" prefWidth="150.0" />
+                  <Label fx:id="stockLabel" layoutX="119.0" layoutY="188.0" prefHeight="18.0" prefWidth="102.0" text="" />
+                  <Label fx:id="priceLabel" layoutX="119.0" layoutY="228.0" prefHeight="18.0" prefWidth="102.0" text="" />
+                  <Button fx:id="addToCartButton" layoutX="167.0" layoutY="133.0" mnemonicParsing="false" text="Add to Cart" />
+                  <ComboBox fx:id="choiceComboBox" layoutX="119.0" layoutY="60.0" prefHeight="26.0" prefWidth="126.0" />
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="250.0">
                <children>
-                  <ScrollPane layoutX="-5.0" layoutY="-4.0" prefHeight="288.0" prefWidth="254.0">
+                  <ScrollPane layoutX="-5.0" layoutY="-4.0" prefHeight="288.0" prefWidth="278.0">
                      <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="391.0" prefWidth="255.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="391.0" prefWidth="258.0">
                            <children>
-                              <TableView fx:id="cartTableView" layoutX="1.0" prefHeight="392.0" prefWidth="253.0">
+                              <TableView fx:id="cartTableView" layoutX="6.0" prefHeight="392.0" prefWidth="247.0">
                                 <columns>
-                                  <TableColumn fx:id="cartTitleCol" prefWidth="104.7999878525734" text="Title" />
-                                  <TableColumn fx:id="cartQuantityCol" prefWidth="82.4000244140625" text="Quantity" />
-                                    <TableColumn fx:id="cartPriceCol" prefWidth="49.60003662109375" text="Price" />
+                                  <TableColumn fx:id="cartTitleCol" prefWidth="115.1999454498291" text="Title" />
+                                  <TableColumn fx:id="cartQuantityCol" prefWidth="65.60003662109375" text="Quantity" />
+                                    <TableColumn fx:id="cartPriceCol" prefWidth="63.199951171875" text="Price" />
                                 </columns>
                               </TableView>
                            </children>
@@ -81,7 +81,7 @@
                               <VBox prefHeight="31.0" prefWidth="11.0" />
                               <VBox prefHeight="31.0" prefWidth="114.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" text="Button" />
+                                    <Button fx:id="removeButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" text="Remove from cart" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="31.0" prefWidth="19.0" />
