@@ -3,6 +3,13 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Random;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -20,6 +28,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Cart;
 import model.Model;
@@ -49,17 +58,23 @@ public class CheckoutController {
 	@FXML
 	private Label priceTotalLabel;
 	@FXML
+	private Label ccErrorLabel;
+	@FXML
+	private Label dateErrorLabel;
+	@FXML
+	private Label cvvErrorLabel;
+	@FXML
 	private Button closeButton;
 	@FXML
 	private Button purchaseButton;
 	@FXML
-	private TextField ccTextField;
+	private PasswordField ccNumberTextField;
 	@FXML
 	private TextField mmTextField;
 	@FXML
 	private TextField yyTextField;
 	@FXML
-	private TextField cvvTextField;
+	private PasswordField cvvTextField;
 	
 	
 	private ObservableList <Cart> dataCart;
@@ -88,12 +103,12 @@ public class CheckoutController {
     
         
             dataCart = FXCollections.observableArrayList();
+            
         try {
        
     
        
             dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
-      
             priceTotalLabel.setText("0");
             cartTableView.setItems(dataCart);
             dataCart.forEach((Cart cart) -> { 
@@ -108,6 +123,46 @@ public class CheckoutController {
         }catch (SQLException ex) {
             
            }
+        purchaseButton.setOnAction(event -> {
+        	ccErrorLabel.setText("");
+        	dateErrorLabel.setText("");
+        	cvvErrorLabel.setText("");
+        	if(validateFields()==true) {
+          	    LocalDateTime myObj = LocalDateTime.now();               
+                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                String formattedDate = myObj.format(myFormatObj);
+                
+                if (dataCart.isEmpty()==false) {
+            
+                try {
+            	    int random = uniqueRandom();
+				    model.getOrderDao().createOrder(random, model.getCurrentUser().getUsername(), formattedDate, Integer.parseInt(priceTotalLabel.getText()));
+				    dataCart.forEach((Cart cart) -> { 
+		                try {
+						    model.getOrderLineDao().createOrderLine(random, cart.getbooktitle(), cart.getcopies(),cart.getprice()) ;
+						    model.getCartDao().removeCart(cart.getrowid());
+					    } catch (SQLException e) {
+						
+						    e.printStackTrace();
+					    }
+		            });
+				    dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
+	                priceTotalLabel.setText("0");
+	                cartTableView.setItems(dataCart);
+	                dataCart.forEach((Cart cart) -> { 
+	                    priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies())+Integer.parseInt(priceTotalLabel.getText())));
+	                });
+			    } catch (SQLException e) {
+				
+				    e.printStackTrace();
+		   	    }
+                }else {
+                	ccErrorLabel.setText("Cart is Empty");
+                	ccErrorLabel.setTextFill(Color.RED);
+                }
+            
+        	}
+        	});
         logOut.setOnAction(event -> {
 		    stage.close();
 		    parentStage.show();
@@ -122,9 +177,77 @@ public class CheckoutController {
 	}
 	
     
-	
+	public boolean validateFields() {
+	    if (ccNumberTextField.getText().length() == 16 && ccNumberTextField.getText().matches("[0-9]+")) {
+	    	String ExpDate = mmTextField.getText().concat("/20").concat(yyTextField.getText());
+	    	
+		    if(validateJavaDate(ExpDate)==true) {
+		    	if (cvvTextField.getText().length() == 3 && cvvTextField.getText().matches("[0-9]+")) {
+		    	    return true;  	
+		       }else{
+		        	cvvErrorLabel.setText("invalid CVV");
+		        	cvvErrorLabel.setTextFill(Color.RED);
+		        	return false;
+		       }
+		     }
+		 }else{
+			 ccErrorLabel.setText("Card number MUST be a 16 digit number");
+			 ccErrorLabel.setTextFill(Color.RED);
+			 return false;
+			 }
+		return false;
+		}
+		
 		
 	
+	public  boolean validateJavaDate(String strDate)
+	   {
+		if (strDate.trim().equals("/20"))
+		{
+			dateErrorLabel.setText("invalid Date");
+		    dateErrorLabel.setTextFill(Color.RED);
+		     return false;
+		}
+		else
+		{
+		    SimpleDateFormat sdfrmt = new SimpleDateFormat("MM/yyyy");
+		    sdfrmt.setLenient(false);
+		    try
+		    {
+		    	 if (new SimpleDateFormat("MM/yyyy").parse(strDate).after(new Date())) {
+		    		 return true;
+				 }else {  
+				     dateErrorLabel.setText("invalid Date");
+				     dateErrorLabel.setTextFill(Color.RED);
+				     return false;
+				    }
+				    	
+		    }
+		    catch (ParseException e)
+		    {
+		    	dateErrorLabel.setText("invalid Date");
+			    dateErrorLabel.setTextFill(Color.RED);
+		        return false;
+		    }
+	
+		}
+	   }
+	
+		
+	public int uniqueRandom() {
+		Random rnd = new Random();
+        int number = 3;
+        try {
+			while(model.getOrderDao().getUniqueOrderno(number)==true){
+				 number = rnd.nextInt(999999); 			
+			}return number;
+		} catch (SQLException e) {	
+			e.printStackTrace();
+		}
+		return number;
+		
+		
+	}
 	
 	
 	

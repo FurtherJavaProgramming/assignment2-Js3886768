@@ -42,6 +42,8 @@ public class HomeController {
 	@FXML
 	private MenuItem viewallbooks;
 	@FXML
+	private MenuItem viewOrders;
+	@FXML
 	private TextArea dashboard;
 	@FXML
 	private TableColumn<Book, String> homeTableCol;
@@ -172,13 +174,9 @@ public class HomeController {
 			VBox root = loader.load();
 			
 			CheckoutController.showStage(root);
-			
-			
-			
 			stage.close();
 		} catch (IOException e) {
-			//message.setText(e.getMessage());
-			
+			//message.setText(e.getMessage());	
 			
 		}});
 	
@@ -201,6 +199,22 @@ public class HomeController {
 		} catch (IOException e) {
 			//message.setText(e.getMessage());
 			
+			
+		}});
+	viewOrders.setOnAction(event -> {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OrderView.fxml"));
+			
+			// Customize controller instance
+			OrderController OrderController =  new OrderController(stage, model);
+
+			loader.setController(OrderController);
+			VBox root = loader.load();
+			
+			OrderController.showStage(root);
+			stage.close();
+		} catch (IOException e) {
+			//message.setText(e.getMessage());	
 			
 		}});
 	
