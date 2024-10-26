@@ -31,7 +31,7 @@
             <Menu mnemonicParsing="false" text="Cart">
               <items>
                 <MenuItem fx:id="viewCart" mnemonicParsing="false" text="View Cart" />
-                  <MenuItem mnemonicParsing="false" text="Checkout" />
+                  <MenuItem fx:id="viewCheckout" mnemonicParsing="false" text="Checkout" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Orders">

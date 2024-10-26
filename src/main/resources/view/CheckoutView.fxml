@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar fx:id="menu" prefHeight="25.0" prefWidth="870.0" VBox.vgrow="NEVER">
+      <menus>
+            <Menu fx:id="profile" mnemonicParsing="false" text="Home">
+              <items>
+                <MenuItem fx:id="logOut" mnemonicParsing="false" text="Return To Home" />
+              </items>
+            </Menu>
+      </menus>
+    </MenuBar>
+      <AnchorPane prefHeight="430.0" prefWidth="544.0">
+         <children>
+            <TableView fx:id="cartTableView" layoutX="150.0" layoutY="24.0" prefHeight="172.0" prefWidth="299.0">
+              <columns>
+                <TableColumn fx:id="cartTitleCol" prefWidth="157.60003662109375" text="Title" />
+                <TableColumn fx:id="cartQuantityCol" prefWidth="72.79998779296875" text="Quantity" />
+                  <TableColumn fx:id="cartPriceCol" prefWidth="68.0" text="Price $" />
+              </columns>
+            </TableView>
+            <PasswordField fx:id="ccNumberTextField" layoutX="150.0" layoutY="250.0" />
+            <TextField fx:id="mmTextField" layoutX="150.0" layoutY="299.0" prefHeight="26.0" prefWidth="34.0" promptText="MM" />
+            <TextField fx:id="yyTextField" layoutX="208.0" layoutY="299.0" prefHeight="26.0" prefWidth="34.0" promptText="YY" />
+            <Label layoutX="191.0" layoutY="300.0" prefHeight="26.0" prefWidth="16.0" text="/" />
+            <PasswordField fx:id="cvvTextField" layoutX="151.0" layoutY="354.0" prefHeight="26.0" prefWidth="48.0" promptText="***" />
+            <ImageView fx:id="imageView" fitHeight="55.0" fitWidth="214.0" layoutX="235.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@PaymentImg.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="purchaseButton" layoutX="385.0" layoutY="300.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" text="Purchase" />
+            <Button fx:id="closeButton" layoutX="313.0" layoutY="300.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" text="Close" />
+            <Label layoutX="151.0" layoutY="226.0" text="Card Number:" />
+            <Label layoutX="150.0" layoutY="276.0" text="Expiration date:" />
+            <Label layoutX="150.0" layoutY="334.0" text="Cvv number:" />
+            <Label layoutX="313.0" layoutY="250.0" prefHeight="26.0" prefWidth="74.0" text="Total Price:  $" />
+            <Label fx:id="priceTotalLabel" layoutX="387.0" layoutY="254.0" text="0" />
+         </children>
+      </AnchorPane>
+  </children>
+</VBox>

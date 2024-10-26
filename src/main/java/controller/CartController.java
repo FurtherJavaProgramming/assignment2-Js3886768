@@ -1,11 +1,14 @@
 package controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.NoSuchElementException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -17,6 +20,7 @@ import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Book;
@@ -150,9 +154,7 @@ public class CartController {
 			
 
 		});
-		dataCart.forEach((Cart cart) -> { 
-            priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies()+Integer.parseInt(priceTotalLabel.getText()))));
-       });
+		
       
 		addToCartButton.setOnAction(event -> {
 			try {
@@ -268,6 +270,30 @@ public class CartController {
 				
 			}
 		});
+		checkoutButton.setOnAction(event -> {
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CheckoutView.fxml"));
+				
+				
+				// Customize controller instance
+				CheckoutController CheckoutController =  new CheckoutController(stage, model);
+				//loader.setBuilderFactory(new JavaFXBuilderFactory(false));
+				//loader.setResources(null)
+
+				loader.setController(CheckoutController);
+				
+				VBox root = loader.load();
+				
+				CheckoutController.showStage(root);
+				
+				
+				
+				stage.close();
+			} catch (IOException e) {
+				//message.setText(e.getMessage());
+				
+				
+			}});
 	
 	}
 	

@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -34,6 +35,8 @@ public class HomeController {
 	private MenuItem logOut;
 	@FXML
 	private MenuItem viewCart;
+	@FXML
+	private MenuItem viewCheckout;
 	@FXML
 	private MenuItem addCart;
 	@FXML
@@ -158,10 +161,31 @@ public class HomeController {
 			
 			
 		}});
+	viewCheckout.setOnAction(event -> {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CheckoutView.fxml"));
+			
+			// Customize controller instance
+			CheckoutController CheckoutController =  new CheckoutController(stage, model);
+
+			loader.setController(CheckoutController);
+			VBox root = loader.load();
+			
+			CheckoutController.showStage(root);
+			
+			
+			
+			stage.close();
+		} catch (IOException e) {
+			//message.setText(e.getMessage());
+			
+			
+		}});
 	
 	viewallbooks.setOnAction(event -> {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/BooksView.fxml"));
+			
 			
 			// Customize controller instance
 			BooksController BooksController =  new BooksController(stage, model);
