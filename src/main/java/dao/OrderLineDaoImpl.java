@@ -48,22 +48,7 @@ public class OrderLineDaoImpl implements OrderLineDao {
 			return new OrderLine(orderno, booktitle,copies, price);
 		} 
 	}
-	@Override
-	public boolean getUniqueOrderno(int orderno) throws SQLException{
-		String sql = "SELECT * FROM 'order' WHERE orderno = ?";
-		try (Connection connection = Database.getConnection(); 
-				PreparedStatement stmt = connection.prepareStatement(sql);) {
-			stmt.setString(1, Integer.toString(orderno));		
-			try (ResultSet rs = stmt.executeQuery()) {
-				if (rs.next()) {
-					return true;
-				}else {
-					return false;}
-				}
-				
-				}
-			
-	}
+
 	
 	
 	

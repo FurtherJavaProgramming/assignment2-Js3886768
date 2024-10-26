@@ -8,14 +8,11 @@ import java.sql.Statement;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Book;
-import model.Cart;
 import model.Order;
-import model.User;
 
 public class OrderDaoImpl implements OrderDao {
 	private final String TABLE_NAME = "'order'";
-	private ObservableList<Order> dataCart;
+	private ObservableList<Order> dataOrder;
 
 	public OrderDaoImpl() {
 	}
@@ -64,28 +61,29 @@ public class OrderDaoImpl implements OrderDao {
 			
 	}
 	@Override
-	public ObservableList<Order> getOrderList(String username) throws SQLException {
-		
-		String sql = "SELECT orderno, date, price, rowid FROM 'order' WHERE username ='?'ORDER BY 'date' DESC ";
-		 dataCart = FXCollections.observableArrayList();
+	public ObservableList<Order> getOrderList(String username) throws SQLException{		
+		String sql = "SELECT * FROM 'order' WHERE username = ? ORDER BY date DESC";
+		dataOrder = FXCollections.observableArrayList();
 		try (Connection connection = Database.getConnection(); 
 				PreparedStatement stmt = connection.prepareStatement(sql);) {
-			stmt.setString(1, username);
+			stmt.setString(1,username);
+			System.out.println("hey");
 			try (ResultSet rs = stmt.executeQuery()){
+				System.out.println("hey2");
 	            while(rs.next()) {
-	                Order or = new Order();
-	                or.setorderno(rs.getInt("orderno"));
-	                or.setdate(rs.getString("date"));   
-	                or.setprice(rs.getInt("price"));
-	                or.setrowid(rs.getInt("rowid"));
-	                dataCart.add(or);                
+	                Order od = new Order();
+	                od.setorderno(rs.getInt("orderno"));
+	                od.setdate(rs.getString("date"));  
+	                od.setprice(rs.getInt("price"));
+	                dataOrder.add(od);
+	                System.out.println(od.getdate());
 	            } 
-	            return dataCart;
+	            return dataOrder;
 	            
 	           
 	        }catch (SQLException ex) {}
 			}
-		return dataCart;
+		return dataOrder;
 		
 			}
 	

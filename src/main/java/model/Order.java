@@ -30,6 +30,13 @@ public class Order {
 	
 		
 	}
+	public Order(int orderno, String date, int price) {
+		this.orderno.set(orderno); 
+		this.date.set(date);
+		this.price.set(price);
+	
+		
+	}
 	
 	public Order(int orderno) {
 		this.orderno.set(orderno);

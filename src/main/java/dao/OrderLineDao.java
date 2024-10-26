@@ -16,7 +16,7 @@ import model.OrderLine;
 public interface OrderLineDao {
 	void setup() throws SQLException;
 	OrderLine createOrderLine(int orderno, String booktitle, int copies, int price) throws SQLException;
-	boolean getUniqueOrderno(int orderno) throws SQLException;
+	
 
 
 

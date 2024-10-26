@@ -13,7 +13,7 @@
   <children>
     <MenuBar fx:id="menu" prefHeight="25.0" prefWidth="870.0" VBox.vgrow="NEVER">
       <menus>
-            <Menu fx:id="profile" mnemonicParsing="false" text="Home">
+            <Menu mnemonicParsing="false" text="Home">
               <items>
                 <MenuItem fx:id="viewProfile" mnemonicParsing="false" text="Return Home" />
               </items>
@@ -22,11 +22,11 @@
     </MenuBar>
       <AnchorPane prefHeight="450.0" prefWidth="600.0">
          <children>
-            <TableView fx:id="bookView" layoutX="89.0" layoutY="44.0" prefHeight="246.0" prefWidth="421.0">
+            <TableView fx:id="orderTableView" layoutX="89.0" layoutY="44.0" prefHeight="246.0" prefWidth="421.0">
               <columns>
-                <TableColumn fx:id="ordernocol" prefWidth="140.0" text="OrderNumber" />
-                <TableColumn fx:id="datecol" prefWidth="136.0" text="Date" />
-                  <TableColumn fx:id="pricecol" prefWidth="144.80001220703127" text="Price $" />
+                <TableColumn fx:id="ordernoCol" prefWidth="140.0" text="OrderNumber" />
+                <TableColumn fx:id="dateCol" prefWidth="136.0" text="Date" />
+                  <TableColumn fx:id="priceCol" prefWidth="144.80001220703127" text="Price $" />
               </columns>
             </TableView>
             <Button layoutX="399.0" layoutY="331.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" text="Export All Orders" />
