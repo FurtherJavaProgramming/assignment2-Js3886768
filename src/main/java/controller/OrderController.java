@@ -1,6 +1,7 @@
 package controller;
 
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 
@@ -8,13 +9,16 @@ import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Cart;
 import model.Model;
@@ -83,6 +87,37 @@ public class OrderController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+	       
+	        orderTableView.setRowFactory( tv -> {
+	            TableRow<Order> row = new TableRow<>();
+	            row.setOnMouseClicked(event -> {
+	                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+	                    Order rowData = row.getItem();
+	                    System.out.println(rowData.getdate());
+	                    try {
+	            			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OrderDetailView.fxml"));
+	            			System.out.println(rowData.getorderno());
+	            			OrderDetailController OrderDetailController =  new OrderDetailController(stage, model,rowData.getorderno());
+
+	            			loader.setController(OrderDetailController);
+	            			VBox root = loader.load();
+	            			
+	            			OrderDetailController.showStage(root);
+	            			stage.close();
+	            		} catch (IOException e) {
+	            			//message.setText(e.getMessage());
+	 
+	            			
+	            		}
+	                }
+	            });
+	            return row ;
+	        });
+	       
+	        	
+	        
+	    
+	        	
 	        	
 	        
 			

@@ -53,7 +53,7 @@ public class OrderLine {
 	public SimpleStringProperty booktitleProperty() {
 		return booktitle;
 	}
-	public SimpleIntegerProperty copies() {
+	public SimpleIntegerProperty copiesProperty() {
 		return copies;
 	}
 	public SimpleIntegerProperty priceProperty() {

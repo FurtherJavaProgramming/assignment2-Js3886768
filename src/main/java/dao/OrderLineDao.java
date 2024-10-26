@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
+import model.Cart;
 import model.Order;
 import model.OrderLine;
 
@@ -16,6 +17,7 @@ import model.OrderLine;
 public interface OrderLineDao {
 	void setup() throws SQLException;
 	OrderLine createOrderLine(int orderno, String booktitle, int copies, int price) throws SQLException;
+	ObservableList<OrderLine> getOrderLineList(int orderno) throws SQLException;
 	
 
 

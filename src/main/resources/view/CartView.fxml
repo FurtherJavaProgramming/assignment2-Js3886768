@@ -37,7 +37,7 @@
                </children>
             </VBox>
          </children></HBox>
-      <SplitPane dividerPositions="0.48156342182890843" prefHeight="425.0" prefWidth="544.0">
+      <SplitPane dividerPositions="0.48156342182890843"  mouseTransparent="true" prefHeight="425.0" prefWidth="544.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="392.0" prefWidth="263.0">
                <children>

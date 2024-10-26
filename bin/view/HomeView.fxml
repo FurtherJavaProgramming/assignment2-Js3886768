@@ -42,7 +42,7 @@
             </Menu>
       </menus>
     </MenuBar>
-      <SplitPane dividerPositions="0.4446902654867256" prefHeight="338.0" prefWidth="544.0">
+      <SplitPane  mouseTransparent="true" dividerPositions="0.4446902654867256" prefHeight="338.0" prefWidth="544.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>

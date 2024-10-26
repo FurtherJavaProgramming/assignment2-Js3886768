@@ -25,8 +25,8 @@
             <TableView fx:id="orderTableView" layoutX="89.0" layoutY="44.0" prefHeight="246.0" prefWidth="421.0">
               <columns>
                 <TableColumn fx:id="ordernoCol" prefWidth="140.0" text="OrderNumber" />
-                <TableColumn fx:id="dateCol" prefWidth="136.0" text="Date" />
-                  <TableColumn fx:id="priceCol" prefWidth="144.80001220703127" text="Price $" />
+                <TableColumn fx:id="dateCol" prefWidth="136.0" text="Date/Time of Order" />
+                  <TableColumn fx:id="priceCol" prefWidth="144.80001220703127" text="Order Price $" />
               </columns>
             </TableView>
             <Button layoutX="399.0" layoutY="331.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" text="Export All Orders" />

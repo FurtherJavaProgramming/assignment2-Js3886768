@@ -16,7 +16,7 @@ import model.User;
 
 public class OrderLineDaoImpl implements OrderLineDao {
 	private final String TABLE_NAME = "'orderlines'";
-	private ObservableList<Cart> dataCart;
+	private ObservableList<OrderLine> dataLine;
 
 	public OrderLineDaoImpl() {
 	}
@@ -48,6 +48,36 @@ public class OrderLineDaoImpl implements OrderLineDao {
 			return new OrderLine(orderno, booktitle,copies, price);
 		} 
 	}
+	
+	@Override
+	public ObservableList<OrderLine> getOrderLineList(int orderno) throws SQLException {
+		
+		String sql = "SELECT booktitle, quantity, price, rowid FROM orderlines WHERE orderno = ?";
+		 dataLine = FXCollections.observableArrayList();
+		try (Connection connection = Database.getConnection(); 
+				PreparedStatement stmt = connection.prepareStatement(sql);) {
+			stmt.setString(1, Integer.toString(orderno));
+			try (ResultSet rs = stmt.executeQuery()){
+	            while(rs.next()) {
+	                OrderLine ol = new OrderLine();
+	                ol.setbooktitle(rs.getString("booktitle"));
+	                System.out.println("1");
+	                ol.setcopies(rs.getInt("quantity"));
+	                System.out.println("2");
+	                ol.setprice(rs.getInt("price"));
+	                System.out.println("3");
+	                dataLine.add(ol);                
+	            } 
+	            return dataLine;
+	            
+	            
+	           
+
+	        }catch (SQLException ex) {}
+			}
+		return dataLine;
+		
+			}
 
 	
 	
