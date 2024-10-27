@@ -67,9 +67,7 @@ public class OrderDaoImpl implements OrderDao {
 		try (Connection connection = Database.getConnection(); 
 				PreparedStatement stmt = connection.prepareStatement(sql);) {
 			stmt.setString(1,username);
-			System.out.println("hey");
 			try (ResultSet rs = stmt.executeQuery()){
-				System.out.println("hey2");
 	            while(rs.next()) {
 	                Order od = new Order();
 	                od.setorderno(rs.getInt("orderno"));
