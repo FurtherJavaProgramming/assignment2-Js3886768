@@ -73,27 +73,7 @@ public class HomeController {
 	       
 	    
 	       
-	        try {
-				dataBooks.addAll(model.getBookDao().getBookList());
-				Comparator<Book> bookComparator = Comparator.comparing(Book::getsold);
-				Collections.sort(dataBooks, bookComparator);
-				dataBooks.remove(0);
-				dataBooks.remove(0);
-				dataBooks.remove(0);
-				dataBooks.remove(0);
-				Collections.reverse(dataBooks);
-				
-				
-			
-			
-				homeTableView.setItems(dataBooks);;
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	      
-	       
-	        homeTableView.setItems(dataBooks);
+	     
 	
 	
 	
@@ -217,6 +197,28 @@ public class HomeController {
 			//message.setText(e.getMessage());	
 			
 		}});
+	stage.setOnShown(event -> {
+		try {
+			dataBooks.setAll(model.getBookDao().getBookList());
+			Comparator<Book> bookComparator = Comparator.comparing(Book::getsold);
+			Collections.sort(dataBooks, bookComparator);
+			dataBooks.remove(0);
+			dataBooks.remove(0);
+			dataBooks.remove(0);
+			dataBooks.remove(0);
+			Collections.reverse(dataBooks);
+			
+			
+		
+		
+			homeTableView.setItems(dataBooks);;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		
+		
+		}});
 	
 }
 
@@ -230,6 +232,9 @@ public class HomeController {
 		stage.setTitle("Home");
 		stage.show();
 		dashboard.setText("hi " + model.getCurrentUser().getUsername());
+	
+       
+
 	
 	
 	}

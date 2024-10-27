@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Random;
 
@@ -30,6 +32,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.Book;
 import model.Cart;
 import model.Model;
 
@@ -78,6 +81,7 @@ public class CheckoutController {
 	
 	
 	private ObservableList <Cart> dataCart;
+	private boolean mark;
 	
 	public CheckoutController(Stage parentStage, Model model) {
 		this.stage = new Stage();
@@ -104,25 +108,7 @@ public class CheckoutController {
         
             dataCart = FXCollections.observableArrayList();
             
-        try {
-       
-    
-       
-            dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
-            priceTotalLabel.setText("0");
-            cartTableView.setItems(dataCart);
-            dataCart.forEach((Cart cart) -> { 
-                priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies())+Integer.parseInt(priceTotalLabel.getText())));
-            });
-       
-     
         
-        
-       
-        
-        }catch (SQLException ex) {
-            
-           }
         purchaseButton.setOnAction(event -> {
         	ccErrorLabel.setText("");
         	dateErrorLabel.setText("");
@@ -133,30 +119,37 @@ public class CheckoutController {
                 String formattedDate = myObj.format(myFormatObj);
                 
                 if (dataCart.isEmpty()==false) {
-            
-                try {
-            	    int random = uniqueRandom();
-				    model.getOrderDao().createOrder(random, model.getCurrentUser().getUsername(), formattedDate, Integer.parseInt(priceTotalLabel.getText()));
-				    dataCart.forEach((Cart cart) -> { 
-		                try {
-						    model.getOrderLineDao().createOrderLine(random, cart.getbooktitle(), cart.getcopies(),cart.getprice()) ;
-						    model.getCartDao().removeCart(cart.getrowid());
-					    } catch (SQLException e) {
-						
-						    e.printStackTrace();
-					    }
-		            });
-				    dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
-	                priceTotalLabel.setText("0");
-	                cartTableView.setItems(dataCart);
-	                dataCart.forEach((Cart cart) -> { 
-	                    priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies())+Integer.parseInt(priceTotalLabel.getText())));
-	                });
-			    } catch (SQLException e) {
+                	if (validatequantityavaliable()==true) {
+                        try {
+            	            int random = uniqueRandom();
+				            model.getOrderDao().createOrder(random, model.getCurrentUser().getUsername(), formattedDate, Integer.parseInt(priceTotalLabel.getText()));
+				            dataCart.forEach((Cart cart) -> { 
+		                        try {
+						            model.getOrderLineDao().createOrderLine(random, cart.getbooktitle(), cart.getcopies(),cart.getprice()) ;
+						            model.getBookDao().setsold(cart.getbooktitle(), cart.getcopies());
+						            model.getCartDao().removeCart(cart.getrowid());
+					            } catch (SQLException e) {
+						 
+						        e.printStackTrace();
+					        }
+		                    });
+				            dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
+	                        priceTotalLabel.setText("0");
+	                        cartTableView.setItems(dataCart);
+	                        dataCart.forEach((Cart cart) -> { 
+	                            priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies())+Integer.parseInt(priceTotalLabel.getText())));
+	                        });
+	                        ccErrorLabel.setText("ORDER SUCCESSFULLY PLACED");
+	                    	ccErrorLabel.setTextFill(Color.GREEN);
+			              } catch (SQLException e) {
 				
-				    e.printStackTrace();
-		   	    }
-                }else {
+				             e.printStackTrace();
+		   	              }
+                	    }else {
+                		ccErrorLabel.setText("ERROR not enough stock to complete order");
+                    	ccErrorLabel.setTextFill(Color.RED);
+                	}
+                	}else {
                 	ccErrorLabel.setText("Cart is Empty");
                 	ccErrorLabel.setTextFill(Color.RED);
                 }
@@ -171,6 +164,28 @@ public class CheckoutController {
 		    stage.close();
 		    parentStage.show();
 	    });
+        stage.setOnShown(event -> {
+        	try {
+        	       
+        	    
+        	       
+                dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
+                priceTotalLabel.setText("0");
+                cartTableView.setItems(dataCart);
+                dataCart.forEach((Cart cart) -> { 
+                    priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies())+Integer.parseInt(priceTotalLabel.getText())));
+                });
+           
+         
+            
+            
+           
+            
+            }catch (SQLException ex) {
+                
+               }
+    		
+    		});
     
 	
 	
@@ -232,11 +247,29 @@ public class CheckoutController {
 	
 		}
 	   }
+	public  boolean validatequantityavaliable() {
+		mark = true;
+		try {
+		dataCart.forEach((Cart cart) -> { 
+           
+			    try {
+					if(cart.getcopies()>model.getBookDao().getBook(cart.getbooktitle()).getcopies()) {
+						mark = false;	
+				}}catch (SQLException e) {
+					e.printStackTrace();
+				}
+		  
+        });
+		return mark;
+		}catch(Exception e)
+	    {return mark; }
+		
+	}
 	
 		
 	public int uniqueRandom() {
 		Random rnd = new Random();
-        int number = 3;
+        int number= rnd.nextInt(999999);
         try {
 			while(model.getOrderDao().getUniqueOrderno(number)==true){
 				 number = rnd.nextInt(999999); 			
@@ -251,11 +284,13 @@ public class CheckoutController {
 	
 	
 	
+	
+	
 	public void showStage(Pane root) {
 		Scene scene = new Scene(root, 600, 450);
 		stage.setScene(scene);
 		stage.setResizable(false);
-		stage.setTitle("Home");
+		stage.setTitle("Checkout");
 		stage.show();
 		
 		

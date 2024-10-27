@@ -103,27 +103,6 @@ public class CartController {
 	    
 	        
 	        dataCart = FXCollections.observableArrayList();
-	    try {
-	       
-	    
-	       
-	        dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
-	      
-	        priceTotalLabel.setText("0");
-	        cartTableView.setItems(dataCart);
-	        dataCart.forEach((Cart cart) -> { 
-	             priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies())+Integer.parseInt(priceTotalLabel.getText())));
-	        });
-	       
-	     
-	        
-	        
-	       
-	        
-		}catch (SQLException ex) {
-	            
-	       }
-	    
 	    
 	    
 		logOut.setOnAction(event -> {
@@ -209,6 +188,7 @@ public class CartController {
 		});
 		
 		removeButton.setOnAction(event -> {
+			try {
 			cartTableView.getSelectionModel();
 			TableViewSelectionModel<Cart> selectionModel = 
 				    cartTableView.getSelectionModel();
@@ -216,7 +196,7 @@ public class CartController {
 				    selectionModel.getSelectedItems();
 			Cart ct = new Cart();
 			ct = selectedItems.getFirst();
-			try {
+			
 				model.getCartDao().removeCart(ct.getrowid());
 				dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
 		        cartTableView.setItems(dataCart);
@@ -228,14 +208,42 @@ public class CartController {
 				errorLabel.setText(e.getMessage());
 				errorLabel.setTextFill(Color.RED);
 			}
-		});
+			catch (Exception e) {
+				errorLabel.setText("ERROR");
+				errorLabel.setTextFill(Color.RED);
+			}
+		}); 
+		stage.setOnShown(event -> {
+        	try {
+        	       
+        	    
+        	       
+                dataCart.setAll(model.getCartDao().getCartList(model.getCurrentUser().getUsername()));
+                priceTotalLabel.setText("0");
+                cartTableView.setItems(dataCart);
+                dataCart.forEach((Cart cart) -> { 
+                    priceTotalLabel.setText(Integer.toString((cart.getprice()*cart.getcopies())+Integer.parseInt(priceTotalLabel.getText())));
+                });
+           
+         
+            
+            
+           
+            
+            }catch (SQLException ex) {
+                
+               }
+    		
+    		});
+
 		updateQuantityButton.setOnAction(event -> {
+			try {
 			cartTableView.getSelectionModel();
 			TableViewSelectionModel<Cart> selectionModel = 
 				    cartTableView.getSelectionModel();
 			ObservableList<Cart> selectedItems = 
 				    selectionModel.getSelectedItems();
-			try {
+			
 			    Cart ct = new Cart();
 			    ct = selectedItems.getFirst();
 			    Book bk = new Book();
@@ -294,6 +302,7 @@ public class CartController {
 				
 				
 			}});
+		
 	
 	}
 	
@@ -305,7 +314,7 @@ public class CartController {
 		Scene scene = new Scene(root, 600, 450);
 		stage.setScene(scene);
 		stage.setResizable(false);
-		stage.setTitle("Home");
+		stage.setTitle("Cart");
 		stage.show();
 		
 	}

@@ -133,7 +133,7 @@ public class OrderDetailController {
 		Scene scene = new Scene(root, 600, 450);
 		stage.setScene(scene);
 		stage.setResizable(false);
-		stage.setTitle("books");
+		stage.setTitle("Order Details");
 		stage.show();
 	}
 }

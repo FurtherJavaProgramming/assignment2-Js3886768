@@ -120,7 +120,39 @@ public class BookDaoImpl implements BookDao {
 	public Book getBook(String booktitle, String author, int copies, int price, int sold) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
-	} 
+	}
+
+	@Override
+	public void setcopies(String booktitle, int copies) throws SQLException {
+		String sql = "UPDATE [books]" +
+				"SET copies = ?" +
+				"WHERE booktitle = ?" ;
+		try (Connection connection = Database.getConnection(); 
+				PreparedStatement stmt = connection.prepareStatement(sql);) {
+			
+			stmt.setString(1, Integer.toString(copies));
+			stmt.setString(2, booktitle);
+	        stmt.executeUpdate();
+		
+	}}
+		
+	
+
+	@Override
+	public void setsold(String booktitle,int copies) throws SQLException {
+		String sql = "UPDATE [books]" +
+				"SET copies = copies - ?" +
+				",sold = sold + ?" +
+				"WHERE booktitle = ?" ;
+		try (Connection connection = Database.getConnection(); 
+				PreparedStatement stmt = connection.prepareStatement(sql);) {
+			
+			stmt.setString(1, Integer.toString(copies));
+			stmt.setString(2, Integer.toString(copies));
+			stmt.setString(3, booktitle);
+	        stmt.executeUpdate();
+		
+	}}
 		
 	}
 

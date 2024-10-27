@@ -34,7 +34,7 @@ public class AdminController {
 		Scene scene = new Scene(root, 600, 400);
 		stage.setScene(scene);
 		stage.setResizable(false);
-		stage.setTitle("Home");
+		stage.setTitle("Admin Home");
 		stage.show();
 	}
 }

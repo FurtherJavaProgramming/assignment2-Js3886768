@@ -93,10 +93,10 @@ public class OrderController {
 	            row.setOnMouseClicked(event -> {
 	                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
 	                    Order rowData = row.getItem();
-	                    System.out.println(rowData.getdate());
+	                 
 	                    try {
 	            			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OrderDetailView.fxml"));
-	            			System.out.println(rowData.getorderno());
+	            			
 	            			OrderDetailController OrderDetailController =  new OrderDetailController(stage, model,rowData.getorderno());
 
 	            			loader.setController(OrderDetailController);
@@ -146,7 +146,7 @@ public class OrderController {
 		Scene scene = new Scene(root, 600, 450);
 		stage.setScene(scene);
 		stage.setResizable(false);
-		stage.setTitle("books");
+		stage.setTitle("Orders");
 		stage.show();
 	}
 }

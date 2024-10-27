@@ -76,7 +76,7 @@ public class EditProfileController {
 		Scene scene = new Scene(root, 600, 400);
 		stage.setScene(scene);
 		stage.setResizable(false);
-		stage.setTitle("Sign up");
+		stage.setTitle("Edit Profile");
 		stage.show();
 	}
 }

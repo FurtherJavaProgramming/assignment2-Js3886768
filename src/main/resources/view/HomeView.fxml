@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -17,7 +16,6 @@
       <menus>
             <Menu fx:id="profile" mnemonicParsing="false" text="Profile">
               <items>
-                <MenuItem fx:id="viewProfile" mnemonicParsing="false" text="View my profile" />
                   <MenuItem fx:id="updateProfile" mnemonicParsing="false" text="Update my profile" />
                   <MenuItem fx:id="logOut" mnemonicParsing="false" text="Log out" />
               </items>
@@ -37,28 +35,20 @@
             <Menu mnemonicParsing="false" text="Orders">
               <items>
                 <MenuItem fx:id="viewOrders" mnemonicParsing="false" text="View Orders" />
-                  <MenuItem mnemonicParsing="false" text="Export Orders" />
               </items>
             </Menu>
       </menus>
     </MenuBar>
-      <SplitPane  mouseTransparent="true" dividerPositions="0.4446902654867256" prefHeight="338.0" prefWidth="544.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <TextArea fx:id="dashboard" editable="false" layoutY="-1.0" prefHeight="337.0" prefWidth="238.0" text="Hi User" />
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <TableView fx:id="homeTableView" layoutX="21.0" layoutY="33.0" prefHeight="247.0" prefWidth="256.0">
-                    <columns>
-                      <TableColumn fx:id="homeTableCol" prefWidth="255.20002365112305" text="Top  5 Books" />
-                    </columns>
-                  </TableView>
-               </children></AnchorPane>
-        </items>
-      </SplitPane>
+      <AnchorPane prefHeight="470.0" prefWidth="544.0">
+         <children>
+            <TableView fx:id="homeTableView" layoutX="264.0" layoutY="14.0" prefHeight="152.0" prefWidth="256.0">
+              <columns>
+                <TableColumn fx:id="homeTableCol" prefWidth="255.20002365112305" text="Top  5 Books" />
+              </columns>
+            </TableView>
+            <TextArea fx:id="dashboard" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="311.0" prefWidth="219.0" text="Hi User" />
+         </children>
+      </AnchorPane>
       <VBox prefHeight="47.0" prefWidth="544.0" />
       <HBox prefHeight="15.0" prefWidth="544.0">
          <children>
