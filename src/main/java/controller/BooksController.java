@@ -97,10 +97,6 @@ public class BooksController implements Initializable {
     }
 	
 	
-	
-	 
-	
-	
 	public void showStage(Pane root) {
 		Scene scene = new Scene(root, 600, 400);
 		stage.setScene(scene);

@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -44,6 +45,8 @@ public class HomeController {
 	@FXML
 	private TextArea dashboard;
 	@FXML
+	private Button logOutButton;
+	@FXML
 	private TableColumn<Book, String> homeTableCol;
 	@FXML
 	private TableView<Book> homeTableView;
@@ -58,7 +61,6 @@ public class HomeController {
 		
 	}
 	
-	// Add your code to complete the functionality of the program
 	@FXML
 	public void initialize() {
 		
@@ -90,6 +92,10 @@ public class HomeController {
 			
 		 }});
 	    logOut.setOnAction(event -> {
+		    stage.close();
+		    parentStage.show();
+	    });
+	    logOutButton.setOnAction(event -> {
 		    stage.close();
 		    parentStage.show();
 	    });
@@ -159,8 +165,6 @@ public class HomeController {
 	     viewOrders.setOnAction(event -> {
 		     try {
 			    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OrderView.fxml"));
-			
-			// Customize controller instance
 			    OrderController OrderController =  new OrderController(stage, model);
 
 			    loader.setController(OrderController);
@@ -201,12 +205,23 @@ public class HomeController {
 	
 	
 	public void showStage(Pane root) {
-		Scene scene = new Scene(root, 600, 400);
+		Scene scene = new Scene(root, 600, 450);
 		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.setTitle("Home");
 		stage.show();
-		dashboard.setText("hi " + model.getCurrentUser().getUsername());
+		dashboard.setText("Welcome " + model.getCurrentUser().getUsername() +" to TheReadingRoom!"
+				+ "\n"
+				+ "Here you can Buy a variety of books"
+				+ "\n"
+				+ "Thank you for choosing us! :)"
+				+ "\n"
+				+ "\n"
+				+ "\n"
+				+ "Use the top left menu to navigate the"
+				+ "\n"
+				+ "application!"
+				);
 	
        
 

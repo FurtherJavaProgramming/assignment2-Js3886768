@@ -22,8 +22,12 @@ public class BookDaoImpl implements BookDao {
 	public void setup() throws SQLException {
 		try (Connection connection = Database.getConnection();
 				Statement stmt = connection.createStatement();) {
-			String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (username VARCHAR(10) NOT NULL,"
-					+ "password VARCHAR(8) NOT NULL," + "PRIMARY KEY (username))";
+			String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(booktitle TEXT NOT NULL,"
+					+ "Author	TEXT NOT NULL,"
+					+ "	copies	INTEGER,"
+					+ "	price	INTEGER NOT NULL,"
+					+ "	sold	INTEGER,"
+					+ "	PRIMARY KEY(booktitle))";
 			stmt.executeUpdate(sql);
 		} 
 	}

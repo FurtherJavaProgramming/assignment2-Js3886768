@@ -174,7 +174,6 @@ public class OrderController {
 	
 	public String convertToCSV(String[] data) {
 	    return Stream.of(data)
-	      .map(this::escapeSpecialCharacters)
 	      .collect(Collectors.joining(","));
 	}
 	
@@ -219,7 +218,6 @@ public class OrderController {
 						dataLines.add(new String[] 
 								  {Integer.toString(order.getorderno()), orderline.getbooktitle(), Integer.toString(orderline.getcopies()), Integer.toString(orderline.getprice()),
 									  Integer.toString((orderline.getcopies()*orderline.getprice()))});
-						
 					});
 					
 				}catch (SQLException e) {
@@ -234,18 +232,6 @@ public class OrderController {
 	    }
 	}
 
-	
-	public String escapeSpecialCharacters(String data) {
-	    if (data == null) {
-	        throw new IllegalArgumentException("Input data cannot be null");
-	    }
-	    String escapedData = data.replaceAll("\\R", " ");
-	    if (data.contains(",") || data.contains("\"") || data.contains("'")) {
-	        data = data.replace("\"", "\"\"");
-	        escapedData = "\"" + data + "\"";
-	    }
-	    return escapedData;
-	}
 	
 	public void showStage(Pane root) {
 		Scene scene = new Scene(root, 600, 450);

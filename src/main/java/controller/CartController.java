@@ -282,10 +282,7 @@ public class CartController {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CheckoutView.fxml"));
 				
 				
-				// Customize controller instance
 				CheckoutController CheckoutController =  new CheckoutController(stage, model);
-				//loader.setBuilderFactory(new JavaFXBuilderFactory(false));
-				//loader.setResources(null)
 
 				loader.setController(CheckoutController);
 				

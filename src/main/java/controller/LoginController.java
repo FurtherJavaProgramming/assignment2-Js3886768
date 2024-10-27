@@ -99,12 +99,9 @@ public class LoginController {
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SignupView.fxml"));
 				
-				// Customize controller instance
 				SignupController signupController =  new SignupController(stage, model);
-
 				loader.setController(signupController);
 				VBox root = loader.load();
-				
 				signupController.showStage(root);
 				
 				message.setText("");

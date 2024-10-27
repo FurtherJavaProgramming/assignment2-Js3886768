@@ -49,9 +49,6 @@ public class OrderDetailController {
 	}
 	
 	
-	
-	// Add your code to complete the functionality of the program
-	
 	@FXML
 	public void initialize(){
 		
@@ -86,7 +83,6 @@ public class OrderDetailController {
 					
 			        
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	        	

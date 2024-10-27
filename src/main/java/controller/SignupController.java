@@ -28,7 +28,6 @@ public class SignupController {
 	private Button close;
 	@FXML
 	private Label status;
-	
 	private Stage stage;
 	private Stage parentStage;
 	private Model model;
