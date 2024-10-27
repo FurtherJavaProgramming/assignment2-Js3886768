@@ -61,11 +61,8 @@ public class OrderLineDaoImpl implements OrderLineDao {
 	            while(rs.next()) {
 	                OrderLine ol = new OrderLine();
 	                ol.setbooktitle(rs.getString("booktitle"));
-	                System.out.println("1");
 	                ol.setcopies(rs.getInt("quantity"));
-	                System.out.println("2");
-	                ol.setprice(rs.getInt("price"));
-	                System.out.println("3");
+	                ol.setprice(rs.getInt("price"));       
 	                dataLine.add(ol);                
 	            } 
 	            return dataLine;

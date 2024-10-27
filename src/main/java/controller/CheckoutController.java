@@ -278,8 +278,6 @@ public class CheckoutController {
 			e.printStackTrace();
 		}
 		return number;
-		
-		
 	}
 	
 	

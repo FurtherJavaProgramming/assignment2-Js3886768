@@ -76,7 +76,6 @@ public class OrderDaoImpl implements OrderDao {
 	                od.setdate(rs.getString("date"));  
 	                od.setprice(rs.getInt("price"));
 	                dataOrder.add(od);
-	                System.out.println(od.getdate());
 	            } 
 	            return dataOrder;
 	            
