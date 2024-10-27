@@ -9,7 +9,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -21,7 +20,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Book;
 import model.Model;
-import model.User;
 
 public class HomeController {
 	private Model model;

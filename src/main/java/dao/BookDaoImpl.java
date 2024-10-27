@@ -5,12 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Book;
-import model.User;
 
 public class BookDaoImpl implements BookDao {
 	private final String TABLE_NAME = "books";

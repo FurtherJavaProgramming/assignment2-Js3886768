@@ -1,11 +1,7 @@
 package dao;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import javafx.collections.ObservableList;
-import model.Cart;
-import model.Order;
 import model.OrderLine;
 
 /**

@@ -8,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -71,7 +70,7 @@ public class CartController {
 	
 	
 	private ObservableList <Cart> dataCart;
-	private ObservableList <Cart> selectedItems;
+	
 	
 	public CartController(Stage parentStage, Model model) {
 		this.stage = new Stage();

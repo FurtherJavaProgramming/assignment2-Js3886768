@@ -8,9 +8,7 @@ import java.sql.Statement;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Book;
 import model.Cart;
-import model.User;
 
 public class CartDaoImpl implements CartDao {
 	private final String TABLE_NAME = "cart";

@@ -1,7 +1,7 @@
 package model;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 import dao.BookDao;
 import dao.BookDaoImpl;
 import dao.CartDao;
@@ -12,7 +12,6 @@ import dao.OrderLineDao;
 import dao.OrderLineDaoImpl;
 import dao.UserDao;
 import dao.UserDaoImpl;
-import javafx.collections.ObservableList;
 
 public class Model {
 	private UserDao userDao;
@@ -20,10 +19,7 @@ public class Model {
 	private OrderDao orderDao;
 	private OrderLineDao orderlineDao;
 	private User currentUser; 
-	private Book book;
-	private Order order;
 	private BookDao bookDao;
-	private ArrayList <Book> dataBooks = new ArrayList<Book>() ;
 
 	public Model() {
 		userDao = new UserDaoImpl();
@@ -68,12 +64,7 @@ public class Model {
 		currentUser = user;
 	}
 	
-	public void setDBL( ArrayList <Book> dataBooks) {
-		this.dataBooks = dataBooks;
-	}
+	
 	
 		
-	public ArrayList <Book> getDBL() {
-		return this.dataBooks;
-	}
 }

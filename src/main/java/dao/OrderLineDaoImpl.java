@@ -8,11 +8,7 @@ import java.sql.Statement;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Book;
-import model.Cart;
-import model.Order;
 import model.OrderLine;
-import model.User;
 
 public class OrderLineDaoImpl implements OrderLineDao {
 	private final String TABLE_NAME = "'orderlines'";

@@ -1,19 +1,12 @@
 package controller;
 
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,7 +26,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.Cart;
 import model.Model;
 import model.Order;
 import model.OrderLine;
@@ -59,7 +51,7 @@ public class OrderController {
 	private Button exportAllButton;
 	private ObservableList<Order> dataOrder;
 	private ObservableList<OrderLine> dataOrderLine;
-	private BufferedReader br;
+
 
 	public OrderController(Stage parentStage, Model model) {
 		this.stage = new Stage();

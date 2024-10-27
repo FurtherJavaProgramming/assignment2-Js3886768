@@ -3,9 +3,6 @@ package controller;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.ArrayList;
-
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
