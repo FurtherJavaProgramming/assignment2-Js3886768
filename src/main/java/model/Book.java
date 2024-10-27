@@ -52,6 +52,10 @@ public class Book {
 	public SimpleIntegerProperty priceProperty() {
 		return price;
 	}
+	public SimpleIntegerProperty soldProperty() {
+		return price;
+	}
+	
 	
 	
 	public int getcopies() {
