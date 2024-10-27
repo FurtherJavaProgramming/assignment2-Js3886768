@@ -150,6 +150,20 @@ public class BookDaoImpl implements BookDao {
 	        stmt.executeUpdate();
 		
 	}}
+
+	@Override
+	public void updateQuantityBook(String booktitle, int copies) throws SQLException {
+		String sql = "UPDATE [books]" +
+				"SET copies = ?" +
+				"WHERE booktitle = ?" ;
+		try (Connection connection = Database.getConnection(); 
+				PreparedStatement stmt = connection.prepareStatement(sql);) {
+			
+			stmt.setString(1, Integer.toString(copies));
+			stmt.setString(2, booktitle);
+	        stmt.executeUpdate();
+		
+	}}
 		
 	}
 

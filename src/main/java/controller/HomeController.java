@@ -62,12 +62,12 @@ public class HomeController {
 	@FXML
 	public void initialize() {
 		
-		 homeTableCol.setCellValueFactory(
-	                new PropertyValueFactory<Book, String>("booktitle")
+        homeTableCol.setCellValueFactory(
+	        new PropertyValueFactory<Book, String>("booktitle")
 	        );
 	        
 	        
-	        dataBooks = FXCollections.observableArrayList();
+	    dataBooks = FXCollections.observableArrayList();
 	       
 	    
 	       
@@ -75,148 +75,125 @@ public class HomeController {
 	
 	
 	
-	updateProfile.setOnAction(event -> {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EditProfileView.fxml"));
+	    updateProfile.setOnAction(event -> {
+		    try {
+			    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EditProfileView.fxml"));
+			    EditProfileController EditProfileController =  new EditProfileController(stage, model);
+			    loader.setController(EditProfileController);
+			    VBox root = loader.load();
 			
-			// Customize controller instance
-			EditProfileController EditProfileController =  new EditProfileController(stage, model);
-
-			loader.setController(EditProfileController);
-			VBox root = loader.load();
+			    EditProfileController.showStage(root);
 			
-			EditProfileController.showStage(root);
+						
+			    stage.close();
+		    }catch (IOException e) {	
 			
-			
-			
-			stage.close();
-		} catch (IOException e) {
-			//message.setText(e.getMessage());
-			
-			
-		}});
-	logOut.setOnAction(event -> {
-		stage.close();
-		parentStage.show();
-	});
+		 }});
+	    logOut.setOnAction(event -> {
+		    stage.close();
+		    parentStage.show();
+	    });
 	
-	viewCart.setOnAction(event -> {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CartView.fxml"));
+	    viewCart.setOnAction(event -> {
+	  	    try {
+			   FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CartView.fxml"));
+			   CartController CartController =  new CartController(stage, model);
+			   loader.setController(CartController);
+			   VBox root = loader.load();
 			
-			// Customize controller instance
-			CartController CartController =  new CartController(stage, model);
-
-			loader.setController(CartController);
-			VBox root = loader.load();
-			
-			CartController.showStage(root);
+			   CartController.showStage(root);
 			
 			
 			
-			stage.close();
-		} catch (IOException e) {
-			//message.setText(e.getMessage());
+			   stage.close();
+		    } catch (IOException e) {
 			
 			
-		}});
+			
+	    }});
 	
-	addCart.setOnAction(event -> {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CartView.fxml"));
+	    addCart.setOnAction(event -> {
+		    try {
+			    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CartView.fxml"));
+			    CartController CartController =  new CartController(stage, model);
+			    loader.setController(CartController);
+			    VBox root = loader.load();
 			
-			// Customize controller instance
-			CartController CartController =  new CartController(stage, model);
+			    CartController.showStage(root);
+			
+			
+			
+			    stage.close();
+		   }catch (IOException e) {			
+			
+		    }});
+	    viewCheckout.setOnAction(event -> {
+		    try {
+			    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CheckoutView.fxml"));
+			    CheckoutController CheckoutController =  new CheckoutController(stage, model);
+			    loader.setController(CheckoutController);
+			    VBox root = loader.load();
+			    CheckoutController.showStage(root);
+			    stage.close();
+		    } catch (IOException e) {
 
-			loader.setController(CartController);
-			VBox root = loader.load();
-			
-			CartController.showStage(root);
-			
-			
-			
-			stage.close();
-		} catch (IOException e) {
-			//message.setText(e.getMessage());
-			
-			
-		}});
-	viewCheckout.setOnAction(event -> {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CheckoutView.fxml"));
-			
-			// Customize controller instance
-			CheckoutController CheckoutController =  new CheckoutController(stage, model);
-
-			loader.setController(CheckoutController);
-			VBox root = loader.load();
-			
-			CheckoutController.showStage(root);
-			stage.close();
-		} catch (IOException e) {
-			//message.setText(e.getMessage());	
-			
-		}});
+		    }});
 	
-	viewallbooks.setOnAction(event -> {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/BooksView.fxml"));
+	     viewallbooks.setOnAction(event -> {
+		     try {
+			    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/BooksView.fxml"));
 			
+			    BooksController BooksController =  new BooksController(stage, model);
+
+			    loader.setController(BooksController);
+			    VBox root = loader.load();
+			
+			    BooksController.showStage(root);
+			
+			
+			
+			    stage.close();
+		     } catch (IOException e) {
+			
+		    }});
+	     viewOrders.setOnAction(event -> {
+		     try {
+			    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OrderView.fxml"));
 			
 			// Customize controller instance
-			BooksController BooksController =  new BooksController(stage, model);
+			    OrderController OrderController =  new OrderController(stage, model);
 
-			loader.setController(BooksController);
-			VBox root = loader.load();
+			    loader.setController(OrderController);
+			    VBox root = loader.load();
 			
-			BooksController.showStage(root);
+			    OrderController.showStage(root);
+			    stage.close();
+		     } catch (IOException e) {
+		  	    //message.setText(e.getMessage());	
+			
+		    }});
+	     stage.setOnShown(event -> {
+		     try {
+			     dataBooks.setAll(model.getBookDao().getBookList());
+			     Comparator<Book> bookComparator = Comparator.comparing(Book::getsold);
+			     Collections.sort(dataBooks, bookComparator);
+			     dataBooks.remove(0);
+			     dataBooks.remove(0);
+			     dataBooks.remove(0);
+			     dataBooks.remove(0);
+			     Collections.reverse(dataBooks);
 			
 			
+		
+		
+			     homeTableView.setItems(dataBooks);;
 			
-			stage.close();
-		} catch (IOException e) {
-			//message.setText(e.getMessage());
-			
-			
-		}});
-	viewOrders.setOnAction(event -> {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OrderView.fxml"));
-			
-			// Customize controller instance
-			OrderController OrderController =  new OrderController(stage, model);
+		     } catch (SQLException e) {
 
-			loader.setController(OrderController);
-			VBox root = loader.load();
-			
-			OrderController.showStage(root);
-			stage.close();
-		} catch (IOException e) {
-			//message.setText(e.getMessage());	
-			
-		}});
-	stage.setOnShown(event -> {
-		try {
-			dataBooks.setAll(model.getBookDao().getBookList());
-			Comparator<Book> bookComparator = Comparator.comparing(Book::getsold);
-			Collections.sort(dataBooks, bookComparator);
-			dataBooks.remove(0);
-			dataBooks.remove(0);
-			dataBooks.remove(0);
-			dataBooks.remove(0);
-			Collections.reverse(dataBooks);
-			
-			
+			    e.printStackTrace();
 		
 		
-			homeTableView.setItems(dataBooks);;
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		
-		
-		}});
+		     }});
 	
 }
 

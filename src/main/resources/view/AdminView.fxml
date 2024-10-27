@@ -8,24 +8,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="450.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-      <AnchorPane prefHeight="449.0" prefWidth="544.0">
+      <AnchorPane prefHeight="450.0" prefWidth="650.0">
          <children>
-            <TableView fx:id="bookView" layoutX="38.0" layoutY="51.0" prefHeight="282.0" prefWidth="467.0">
+            <TableView fx:id="bookView" layoutX="66.0" layoutY="59.0" prefHeight="282.0" prefWidth="467.0">
               <columns>
                 <TableColumn fx:id="titleCol" prefWidth="180.79998779296875" text="Title" />
-                <TableColumn  fx:id="authorCol" prefWidth="71.20001220703125" text="Author" />
+                <TableColumn fx:id="authorCol" prefWidth="71.20001220703125" text="Author" />
                   <TableColumn fx:id="priceCol" prefWidth="54.4000244140625" text="Price" />
                   <TableColumn fx:id="copiesCol" prefWidth="85.5999755859375" text="Copies Sold" />
                   <TableColumn fx:id="quantityCol" prefWidth="77.60003662109375" text="Stock " />
               </columns>
             </TableView>
-            <Label  fx:id="adminLabel" layoutX="213.0" layoutY="21.0" prefHeight="18.0" prefWidth="118.0" text="Welcome " />
-            <TextField layoutX="325.0" layoutY="348.0" prefHeight="26.0" prefWidth="179.0" promptText="Input Stock Quantity" />
-            <Button fx:id="updateStockButton" layoutX="228.0" layoutY="348.0" mnemonicParsing="false" text="Update Stock" />
-            <Label fx:id="errorLabel" layoutX="325.0" layoutY="385.0" prefHeight="18.0" prefWidth="179.0" />
-            <Button fx:id="logoutButton" layoutX="38.0" layoutY="348.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" text="Logout" />
+            <Label fx:id="adminLabel" layoutX="249.0" layoutY="31.0" prefHeight="18.0" prefWidth="118.0" text="Welcome " />
+            <TextField fx:id="stockTextField" layoutX="353.0" layoutY="348.0" prefHeight="26.0" prefWidth="179.0" promptText="Input Stock Quantity" />
+            <Button fx:id="updateStockButton" layoutX="265.0" layoutY="348.0" mnemonicParsing="false" text="Update Stock" />
+            <Label fx:id="errorLabel" layoutX="266.0" layoutY="385.0" prefHeight="18.0" prefWidth="266.0" />
+            <Button fx:id="logoutButton" layoutX="66.0" layoutY="347.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" text="Logout" />
          </children>
       </AnchorPane>
   </children>

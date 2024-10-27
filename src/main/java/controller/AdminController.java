@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,8 +12,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Book;
 import model.Model;
@@ -45,6 +48,8 @@ public class AdminController {
 	private Button logoutButton;
 	@FXML
 	private Button updateStockButton;
+	@FXML
+	private TextField stockTextField;
 	private ObservableList <Book> dataBooks;
 	
 	public AdminController(Stage parentStage, Model model) {
@@ -84,7 +89,7 @@ public class AdminController {
 	       
 	    
 	       
-	        dataBooks.addAll(model.getBookDao().getBookList());
+	        dataBooks.setAll(model.getBookDao().getBookList());
 	      
 	       
 	        bookView.setItems(dataBooks);
@@ -99,7 +104,37 @@ public class AdminController {
 		stage.close();
 		parentStage.show();
 	});
+	updateStockButton.setOnAction(event -> {
+		try {
+			model.getBookDao().updateQuantityBook(bookView.getSelectionModel().getSelectedItem().getbooktitle(), Integer.parseInt(stockTextField.getText()));
+			 dataBooks.setAll(model.getBookDao().getBookList());
+		     bookView.setItems(dataBooks);		
+		     errorLabel.setText("Stock Updated");
+		     errorLabel.setTextFill(Color.GREEN);
+			
+			
+		}catch (SQLException e) {
+			errorLabel.setText(e.getMessage());
+			errorLabel.setTextFill(Color.RED);
+		
+		}catch (NumberFormatException nfe ) {
+			errorLabel.setText("ERROR input only numbers");
+			errorLabel.setTextFill(Color.RED);
+			
+		}catch (NoSuchElementException exception ) {
+			errorLabel.setText("ERROR input only numbers");
+			errorLabel.setTextFill(Color.RED);
+			
+		}catch (Exception exception ) {
+			errorLabel.setText("ERROR Select a row to update stock");
+			errorLabel.setTextFill(Color.RED);
+			
+		
+	}});
 	}
+	
+
+	
 	
 	
 	

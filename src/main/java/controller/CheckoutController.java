@@ -86,19 +86,19 @@ public class CheckoutController {
 	@FXML
 	public void initialize() {
 		
-	     	cartTitleCol.setCellValueFactory(
+	    cartTitleCol.setCellValueFactory(
                     new PropertyValueFactory<Cart, String>("booktitle")
-            );
-            cartQuantityCol.setCellValueFactory(
+         );
+        cartQuantityCol.setCellValueFactory(
                     new PropertyValueFactory<Cart, Integer>("copies")
-            );
+         );
         
-            cartPriceCol.setCellValueFactory(
+        cartPriceCol.setCellValueFactory(
                     new PropertyValueFactory<Cart, Integer>("price")
-            );
+         );
     
         
-            dataCart = FXCollections.observableArrayList();
+        dataCart = FXCollections.observableArrayList();
             
         
         purchaseButton.setOnAction(event -> {
